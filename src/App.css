@@ -16,8 +16,8 @@ body {
 }
 
 .box {
-  box-shadow: -4px 10px 35px -1px rgba(0, 0, 0, 0.75);
-  min-height: 20rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  min-height: 25rem;
   margin: 30px;
   padding: 20px;
   border-radius: 5px;
@@ -31,12 +31,30 @@ button {
   background: transparent;
 }
 
+.btn-borrar{
+  float: right;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #ff0000;
+  color: #fff;
+}
+
 input.title{
   font-size: 20px;
   border-radius: 5px;
   margin: 15px;
 }
 
-p{
-  border: 1px solid #777;
+textarea{
+  width: 550px;
+  height: 200px;
+}
+
+.note{
+  background-color: #eee;
+  padding: 1px 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  min-height: 150px;
 }
