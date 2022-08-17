@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { v4 } from "uuid";
 import './App.css'
+import Header from './components/Header';
+import Notas from "./components/Notas"
 
 //WebSpeechAPI
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const mic = new SpeechRecognition()
 mic.continuous = true
 mic.interimResults = true
-mic.lang = 'es-ES'
+
 
 //Estructura de Nota
-const nota = {title: "",text: "",id:v4()}
+const nota = {title: "",text: ""}
 
 function App() {
-  //YA FUNCIONA PERO AHORA FALTA SEPARAR EN COMPONENTS
   const [isListening, setIsListening] = useState(false)
+  const [isEditing,setIsEditing] = useState(false)
   const [note, setNote] = useState(nota)
   const [savedNotes, setSavedNotes] = useState([])
+  const [language,setLanguage] = useState('es-ES')
+
+  mic.lang = language
 
   //Cargar notas
   useEffect(() => {
@@ -62,10 +67,16 @@ function App() {
   }
 
   const handleSaveNote = () => {
-    const tmpNotas = [...savedNotes, note]
-    setSavedNotes(tmpNotas)
+    if(isEditing){
+      const newNotes = savedNotes.filter((nota) => nota.id !== note.id);
+      const tmpNotas = [...newNotes, note]
+      setSavedNotes(tmpNotas)
+    } else {
+      let tmpNota = {...note,id:v4()}
+      const tmpNotas = [...savedNotes, tmpNota]
+      setSavedNotes(tmpNotas)
+    }
     setNote(nota)
-    console.log(savedNotes)
   }
 
   const handleChangeT = (e) => {
@@ -83,9 +94,16 @@ function App() {
 		setSavedNotes(newNotes);
 	};
 
+  const editNote = (id) => {
+		const noteToEdit = savedNotes.filter((note) => note.id == id)[0];
+    setNote({title: noteToEdit.title,text: noteToEdit.text, id: noteToEdit.id})
+    setIsEditing(true)
+    console.log(noteToEdit)
+	};
+
   return (
     <>
-      <h1>Speech Journal</h1>
+      <Header language={language} setLanguage={setLanguage}/>
       <div className="container">
         {/* RECONOCIMIENTO DE VOZ */}
         <div className="box">
@@ -96,19 +114,7 @@ function App() {
           <input type="text" className='title' value={note.title} onChange={(e)=>handleChangeT(e)}/>
           <textarea placeholder="Toma notas y luego edita" value={note.text} onChange={(e)=>handleChangeN(e)}></textarea>
         </div>
-        {/* NOTAS */}
-        <div className="box">
-          <h2>Notas</h2>
-          {savedNotes.map(n => (
-            <div key={n.id} className="note">
-              <h4>{n.title}</h4>
-              <p>{n.text}</p>
-              {/* USAR ICONS */}
-              <button className='btn-borrar' onClick={()=>deleteNote(n.id)}>Borrar</button>
-              {/* <button >editar</button> */}
-            </div>
-          ))}
-        </div>
+        <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
       </div>
     </>
   )

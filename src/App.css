@@ -40,6 +40,15 @@ button {
   color: #fff;
 }
 
+.btn-editar{
+  float: right;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #fcba03;
+  color: #fff;
+}
+
 input.title{
   font-size: 20px;
   border-radius: 5px;
@@ -57,4 +66,11 @@ textarea{
   border-radius: 5px;
   margin: 10px 0;
   min-height: 150px;
+}
+
+/* HEADER */
+.header{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
 }
