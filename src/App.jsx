@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { v4 } from "uuid";
 import './App.css'
+import GrabarNota from './components/GrabarNota';
 import Header from './components/Header';
 import Notas from "./components/Notas"
 
@@ -10,17 +11,19 @@ const mic = new SpeechRecognition()
 mic.continuous = true
 mic.interimResults = true
 
-
 //Estructura de Nota
 const nota = {title: "",text: ""}
-
 function App() {
   const [isListening, setIsListening] = useState(false)
   const [isEditing,setIsEditing] = useState(false)
   const [note, setNote] = useState(nota)
-  const [savedNotes, setSavedNotes] = useState([])
-  const [language,setLanguage] = useState('es-ES')
+  const [savedNotes, setSavedNotes] = useState(() => {
+    const savedN = localStorage.getItem("notas");
+    return (savedN) ? JSON.parse(savedN) : [];
+  });
 
+  //SpeechRecognition Language
+  const [language,setLanguage] = useState('es-ES')
   mic.lang = language
 
   //Cargar notas
@@ -57,7 +60,7 @@ function App() {
       console.log(transcript)
       let tmpNota = {
         ...note,
-        text:transcript
+        text:note.text+transcript
       }
       setNote(tmpNota)
       mic.onerror = event => {
@@ -66,27 +69,24 @@ function App() {
     }
   }
 
+  const handleChange = (e) => {
+    let tmpNota = {...note,[e.target.name]: e.target.value}
+    setNote(tmpNota)
+  }
+
   const handleSaveNote = () => {
     if(isEditing){
       const newNotes = savedNotes.filter((nota) => nota.id !== note.id);
       const tmpNotas = [...newNotes, note]
       setSavedNotes(tmpNotas)
+      setIsEditing(false)
     } else {
-      let tmpNota = {...note,id:v4()}
+      const date = new Date();
+      let tmpNota = {...note,id:v4(),date: date.toLocaleDateString()}
       const tmpNotas = [...savedNotes, tmpNota]
       setSavedNotes(tmpNotas)
     }
     setNote(nota)
-  }
-
-  const handleChangeT = (e) => {
-    let tmpNota = {...note,title: e.target.value}
-    setNote(tmpNota)
-  }
-
-  const handleChangeN = (e) => {
-    let tmpNota = {...note,text: e.target.value}
-    setNote(tmpNota)
   }
 
   const deleteNote = (id) => {
@@ -95,25 +95,18 @@ function App() {
 	};
 
   const editNote = (id) => {
+    const date = new Date();
 		const noteToEdit = savedNotes.filter((note) => note.id == id)[0];
-    setNote({title: noteToEdit.title,text: noteToEdit.text, id: noteToEdit.id})
+    setNote({title: noteToEdit.title,text: noteToEdit.text, id: noteToEdit.id,date: date.toLocaleDateString()})
     setIsEditing(true)
-    console.log(noteToEdit)
 	};
 
   return (
     <>
       <Header language={language} setLanguage={setLanguage}/>
       <div className="container">
-        {/* RECONOCIMIENTO DE VOZ */}
-        <div className="box">
-          <h2>Grabación de notas</h2>
-          {isListening ? <span>🎙️</span> : <span>🛑</span>}
-          <button onClick={handleSaveNote} disabled={!note.title||!note.text}>Save Note</button>
-          <button onClick={() => setIsListening(prevState => !prevState)}>Start/Stop</button>
-          <input type="text" className='title' value={note.title} onChange={(e)=>handleChangeT(e)}/>
-          <textarea placeholder="Toma notas y luego edita" value={note.text} onChange={(e)=>handleChangeN(e)}></textarea>
-        </div>
+        <GrabarNota note={note} isListening={isListening} setIsListening={setIsListening} 
+          handleSaveNote={handleSaveNote} handleChange={handleChange}/>
         <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
       </div>
     </>
