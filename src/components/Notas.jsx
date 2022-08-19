@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
+import Nota from './Nota';
 import Search from './Search';
 
 const Notas = ({savedNotes, handleDeleteNote, handleEditNote}) => {
@@ -10,12 +10,7 @@ const Notas = ({savedNotes, handleDeleteNote, handleEditNote}) => {
       <Search handleSearchNote={setSearchText}/>
       {savedNotes.filter((note) => note.text.toLowerCase().includes(searchText))
       .map(n => (
-        <div key={n.id} className="note">
-          <button className='btn-note' onClick={()=>handleDeleteNote(n.id)}><FaTrashAlt/></button>
-          <button className='btn-note' onClick={()=>handleEditNote(n.id)}><FaRegEdit/></button>
-          <h4>{n.title}</h4>
-          <p>{n.text}</p>
-        </div>
+        <Nota key={n.id} nota={n} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote}/>
       ))}
     </div>
   )

@@ -35,10 +35,10 @@ function App() {
 		localStorage.setItem('notas',JSON.stringify(savedNotes));
 	}, [savedNotes]);
 
+  // Reconocimiento de voz 
   useEffect(() => {
     handleListen()
   }, [isListening])
-
   const handleListen = () => {
     if (isListening) {
       mic.start()
@@ -73,7 +73,7 @@ function App() {
     let tmpNota = {...note,[e.target.name]: e.target.value}
     setNote(tmpNota)
   }
-
+  // Gestion de las notas
   const handleSaveNote = () => {
     if(isEditing){
       const newNotes = savedNotes.filter((nota) => nota.id !== note.id);
