@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaTrashAlt, FaRegEdit } from 'react-icons/fa';
 
 const Nota = ({nota, handleDeleteNote, handleEditNote}) => {
