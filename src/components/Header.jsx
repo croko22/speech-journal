@@ -7,7 +7,7 @@ const Header = ({language,setLanguage}) => {
 
   return (
     <div className='header'>
-        <h1>Speech Journal</h1>
+        <h1>🎤 Speech Journal</h1>
         {(language=="es-ES")?  <button onClick={handleChangeL}> ES </button> :  <button onClick={handleChangeL}> EN </button>}
     </div>
   )

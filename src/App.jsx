@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { v4 } from "uuid";
-import './App.css'
+import './App.scss'
 import GrabarNota from './components/GrabarNota';
 import Header from './components/Header';
 import Notas from "./components/Notas"
