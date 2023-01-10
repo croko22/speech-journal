@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { v4 } from "uuid";
-import '../App.scss'
+import './Home.scss'
 import GrabarNota from '../components/GrabarNota';
 import Notas from "../components/Notas"
 import Header from "../components/Header"
@@ -99,11 +99,9 @@ function Home() {
 	};
 
   return (
-    <>
-        <Header language={language} setLanguage={setLanguage}/>
-    
+    <>    
         <div className="container">
-            <GrabarNota note={note} isListening={isListening} setIsListening={setIsListening} 
+            <GrabarNota language={language} setLanguage={setLanguage} note={note} isListening={isListening} setIsListening={setIsListening} 
             handleSaveNote={handleSaveNote} handleChange={handleChange}/>
             <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
         </div>

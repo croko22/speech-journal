@@ -1,0 +1,11 @@
+.sessionC {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sessionCard {
+    border: 1px solid #000;
+    width: 500px;
+    border-radius: 15px;
+    padding: 5px 10px;
+}

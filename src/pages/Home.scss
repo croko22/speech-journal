@@ -30,8 +30,12 @@ button {
 	padding: 5px 5px;
 	border: none;
 	font-size: 1em;
-	background: transparent;
 	color: #000;
+	cursor: pointer;
+}
+.date {
+	float: right;
+	padding: 13px 10px;
 }
 input {
 	&.title {
@@ -60,20 +64,4 @@ textarea {
 	height: 150px;
 	overflow: auto;
 	padding: 20px;
-}
-.search {
-	display: flex;
-	align-items: center;
-	background-color: rgb(233, 233, 233);
-	border-radius: 10px;
-	padding: 5px;
-	margin-bottom: 1.5em;
-	input {
-		border: none;
-		background-color: rgb(233, 233, 233);
-		width: 100%;
-		&:focus {
-			outline: none;
-		}
-	}
 }
