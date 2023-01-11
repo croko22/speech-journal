@@ -1,15 +1,26 @@
+import {useState} from 'react'
+import {FaPlus} from 'react-icons/fa'
+import SessionCard from '../components/SessionCard'
 import './SessionConfig.scss'
 
 const SessionConfig = () => {
+  const [addMode, setAddMode] = useState(false)
+  const [selectedCard,setSelectedCard] = useState({})
+
   return (
-    <div className='sessionC'>
+    <div className='sessionConfig'>
         <h1>Session configuration</h1>
-        <div className='sessionCard'>
-            <h3>Question?</h3>
-            <p>Time to think:</p>
-            <p>Time to answer:</p>
-        </div>
-        <section>------+ Add new question</section>
+        {/* //*Rendered sessioncards*/}
+        <SessionCard/>
+        {
+          addMode ?
+          <div>
+            <SessionCard/>
+            <button onClick={()=>setAddMode(false)}><FaPlus/> Create new question</button>
+          </div>
+          :
+          <button onClick={()=>setAddMode(true)}><FaPlus/> Add new question</button>
+        }
     </div>
   )
 }

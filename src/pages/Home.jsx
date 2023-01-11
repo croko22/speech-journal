@@ -3,10 +3,10 @@ import { v4 } from "uuid";
 import './Home.scss'
 import GrabarNota from '../components/GrabarNota';
 import Notas from "../components/Notas"
-import Header from "../components/Header"
 
 //WebSpeechAPI
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+if(!SpeechRecognition) alert('Tu navegador no soporta el reconocimiento de voz')
 const mic = new SpeechRecognition()
 mic.continuous = true
 mic.interimResults = true

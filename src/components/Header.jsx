@@ -1,12 +1,15 @@
 import { FaCog, FaFileAlt } from 'react-icons/fa';
+import './Header.scss'
 
 const Header = () => {
 
   return (
     <div className='header'>
-        <h1>🎤 Speech Journal</h1>
-        <a className='header-link' href="/session"><FaCog/> Journal Session Settings</a>
-        <a className='header-link' href="/"><FaFileAlt/>Saved logs</a>
+        <a className='header-title' href='/'>🎤 Speech Journal</a>
+        <div>
+          <a className='header-link' href="/session"><FaCog/> Journal Session Settings</a>
+          <a className='header-link' href="/"><FaFileAlt/>Saved logs</a>
+        </div>
     </div>
   )
 }
