@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import './Home.scss'
 import GrabarNota from '../components/GrabarNota';
 import Notas from "../components/Notas"
+import { getTasks } from '../lib/firebase';
 
 //WebSpeechAPI
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -26,7 +27,18 @@ function Home() {
   const [language,setLanguage] = useState('es-ES')
   mic.lang = language
 
-  //Cargar notas
+  //Cargar notas (Ya le agarre truco a esta wbd)
+  const getTaskss = async () => {
+    const tasks = await getTasks()
+    tasks.forEach((task) => {
+      console.log(task.id, task.data())
+    })
+  }
+
+  useEffect(() => {
+    getTaskss()
+  },[])
+
   useEffect(() => {
 		const tsavedNotes = JSON.parse(localStorage.getItem('notas'));
 		if (tsavedNotes) setSavedNotes(tsavedNotes);
