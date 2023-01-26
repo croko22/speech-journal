@@ -3,7 +3,6 @@ import { v4 } from "uuid";
 import './Home.scss'
 import GrabarNota from '../components/GrabarNota';
 import Notas from "../components/Notas"
-import { getTasks } from '../lib/firebase';
 
 //WebSpeechAPI
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -26,18 +25,6 @@ function Home() {
   //SpeechRecognition Language
   const [language,setLanguage] = useState('es-ES')
   mic.lang = language
-
-  //Cargar notas (Ya le agarre truco a esta wbd)
-  const getTaskss = async () => {
-    const tasks = await getTasks()
-    tasks.forEach((task) => {
-      console.log(task.id, task.data())
-    })
-  }
-
-  useEffect(() => {
-    getTaskss()
-  },[])
 
   useEffect(() => {
 		const tsavedNotes = JSON.parse(localStorage.getItem('notas'));
@@ -112,11 +99,11 @@ function Home() {
 
   return (
     <>    
-        <div className="container">
-            <GrabarNota language={language} setLanguage={setLanguage} note={note} isListening={isListening} setIsListening={setIsListening} 
-            handleSaveNote={handleSaveNote} handleChange={handleChange}/>
-            <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
-        </div>
+      <div className="container">
+        <GrabarNota language={language} setLanguage={setLanguage} note={note} isListening={isListening} setIsListening={setIsListening} 
+        handleSaveNote={handleSaveNote} handleChange={handleChange}/>
+        <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
+      </div>
     </>
   )
 }
