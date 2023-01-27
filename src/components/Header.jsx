@@ -8,7 +8,7 @@ const Header = () => {
         <a className='header-title' href='/'>🎤 Speech Journal</a>
         <div>
           {/* JUMP TO THE SESSION LINK */}
-          <a className='header-link' href="/session"><FaCog/> Journal Session Settings</a>
+          <a className='header-link' href="/session"><FaCog/> Journal Session</a>
           <a className='header-link' href="/"><FaFileAlt/>Saved logs</a>
         </div>
     </div>
