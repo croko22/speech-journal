@@ -1,47 +1,65 @@
-import {useState} from 'react'
-import {FaPlus} from 'react-icons/fa'
+import { useState, useEffect } from "react";
+import { FaPlus } from "react-icons/fa";
 import { v4 } from "uuid";
-import SessionCard from '../components/SessionCard'
-import './SessionConfig.scss'
+import QuestionCard from "../components/QuestionCard";
+import "./SessionConfig.scss";
 
 const SessionConfig = () => {
-  const [sessions, setSessions] = useState([
-    {id:1, question:'Question 1', timeToThink:60, timeToAnswer:60},
-    {id:2, question:'Question 2', timeToThink:60, timeToAnswer:60},
-    {id:3, question:'Question 3', timeToThink:60, timeToAnswer:60},
-  ])
-  const [addMode, setAddMode] = useState(false)
+  const storedSessions = JSON.parse(localStorage.getItem("Sessions"));
+  const [session, setSession] = useState(storedSessions || []);
+  const [addMode, setAddMode] = useState(false);
 
-  const addQuestion = (session) => {
-    let tmpSession = {...session,id:v4()}
-    setSessions([...sessions, tmpSession])
-    setAddMode(false)
-  }
+  useEffect(() => {
+    localStorage.setItem("Sessions", JSON.stringify(session));
+  }, [session]);
+
+  const addQuestion = (question) => {
+    let tmpQuestion = { ...question, id: v4() };
+    setSession([...session, tmpQuestion]);
+    setAddMode(false);
+  };
 
   const deleteQuestion = (id) => {
-    setSessions(sessions.filter((session) => session.id !== id))
-  }
+    setSession(session.filter((question) => question.id !== id));
+  };
+
+  //TODO: Fix editQuestion
+  const editQuestion = (question) => {
+    deleteQuestion(question.id);
+    addQuestion(question);
+  };
 
   return (
-    <div className='sessionConfig'>
-        <h1>Session configuration</h1>
-        {/* //*Rendered sessioncards*/}
-        {sessions.map((session) => (
-          <SessionCard key={session.id} session={session} deleteQuestion={deleteQuestion}/>
-        ))}
-        {
-          addMode ?
-          <SessionCard 
-            session={{id:0, question:'New question', timeToThink:60, timeToAnswer:60}} 
-            addQuestion={addQuestion}
-            addMode={addMode}
-            setAddMode={setAddMode}
-          />
-          :
-          <button onClick={()=>setAddMode(true)}><FaPlus/> Add new question</button>
-        }
+    <div className="sessionConfig">
+      <h1>Session configuration</h1>
+      {/* //*Rendered QuestionCards*/}
+      {session.map((question) => (
+        <QuestionCard
+          key={question.id}
+          sQuestion={question}
+          deleteQuestion={deleteQuestion}
+          editQuestion={editQuestion}
+        />
+      ))}
+      {addMode ? (
+        <QuestionCard
+          sQuestion={{
+            id: 0,
+            question: "New question",
+            timeToThink: 60,
+            timeToAnswer: 60,
+          }}
+          addQuestion={addQuestion}
+          addMode={addMode}
+          setAddMode={setAddMode}
+        />
+      ) : (
+        <button onClick={() => setAddMode(true)}>
+          <FaPlus /> Add new question
+        </button>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default SessionConfig
+export default SessionConfig;

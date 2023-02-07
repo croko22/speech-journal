@@ -1,111 +1,128 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
-import './Home.scss'
-import GrabarNota from '../components/GrabarNota';
-import Notas from "../components/Notas"
+import "./Home.scss";
+import GrabarNota from "../components/GrabarNota";
+import Notas from "../components/Notas";
 
-//WebSpeechAPI
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-if(!SpeechRecognition) alert('Tu navegador no soporta el reconocimiento de voz')
-const mic = new SpeechRecognition()
-mic.continuous = true
-mic.interimResults = true
+//*WebSpeechAPI
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+//TODO: Redireccionar a una pagina de error
+if (!SpeechRecognition)
+  alert("Tu navegador no soporta el reconocimiento de voz");
+const mic = new SpeechRecognition();
+mic.continuous = true;
+mic.interimResults = true;
 
-//Estructura de Nota
-const nota = {title: "",text: ""}
+//*Estructura de Nota
+const nota = { title: "", text: "" };
 function Home() {
-  const [isListening, setIsListening] = useState(false)
-  const [isEditing,setIsEditing] = useState(false)
-  const [note, setNote] = useState(nota)
-  const [savedNotes, setSavedNotes] = useState(() => {
-    const savedN = localStorage.getItem("notas");
-    return (savedN) ? JSON.parse(savedN) : [];
-  });
-
-  //SpeechRecognition Language
-  const [language,setLanguage] = useState('es-ES')
-  mic.lang = language
+  const [isListening, setIsListening] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [note, setNote] = useState(nota);
+  const [savedNotes, setSavedNotes] = useState(
+    JSON.parse(localStorage.getItem("notas")) || []
+  );
 
   useEffect(() => {
-		const tsavedNotes = JSON.parse(localStorage.getItem('notas'));
-		if (tsavedNotes) setSavedNotes(tsavedNotes);
-	},[]);
-  useEffect(() => {
-		localStorage.setItem('notas',JSON.stringify(savedNotes));
-	}, [savedNotes]);
+    localStorage.setItem("notas", JSON.stringify(savedNotes));
+  }, [savedNotes]);
 
-  // Reconocimiento de voz 
+  //* SpeechRecognition Language
+  const [language, setLanguage] = useState("es-ES");
+  mic.lang = language;
+  //? Reconocimiento de voz
   useEffect(() => {
-    handleListen()
-  }, [isListening])
+    handleListen();
+  }, [isListening]);
   const handleListen = () => {
     if (isListening) {
-      mic.start()
+      mic.start();
       mic.onend = () => {
-        console.log('continue..')
-        mic.start()
-      }
+        console.log("continue..");
+        mic.start();
+      };
     } else {
-      mic.stop()
-      mic.onend = () => {console.log('Stopped Mic on Click')}
+      mic.stop();
+      mic.onend = () => {
+        console.log("Stopped Mic on Click");
+      };
     }
-    mic.onstart = () => {console.log('Mics on')}
+    mic.onstart = () => {
+      console.log("Mics on");
+    };
     //Speech recognition
-    mic.onresult = event => {
+    mic.onresult = (event) => {
       const transcript = Array.from(event.results)
-        .map(result => result[0])
-        .map(result => result.transcript)
-        .join('')
+        .map((result) => result[0])
+        .map((result) => result.transcript)
+        .join("");
       let tmpNota = {
         ...note,
-        text:note.text+transcript
-      }
-      setNote(tmpNota)
-      mic.onerror = event => {console.log(event.error)}
-    }
-  }
+        text: note.text + transcript,
+      };
+      setNote(tmpNota);
+      mic.onerror = (event) => {
+        console.log(event.error);
+      };
+    };
+  };
 
   const handleChange = (e) => {
-    let tmpNota = {...note,[e.target.name]: e.target.value}
-    setNote(tmpNota)
-  }
+    let tmpNota = { ...note, [e.target.name]: e.target.value };
+    setNote(tmpNota);
+  };
   // Gestion de las notas
   const handleSaveNote = () => {
-    if(isEditing){
+    if (isEditing) {
       const newNotes = savedNotes.filter((nota) => nota.id !== note.id);
-      const tmpNotas = [...newNotes, note]
-      setSavedNotes(tmpNotas)
-      setIsEditing(false)
+      const tmpNotas = [...newNotes, note];
+      setSavedNotes(tmpNotas);
+      setIsEditing(false);
     } else {
       const date = new Date();
-      let tmpNota = {...note,id:v4(),date: date.toLocaleDateString()}
-      const tmpNotas = [...savedNotes, tmpNota]
-      setSavedNotes(tmpNotas)
+      let tmpNota = { ...note, id: v4(), date: date.toLocaleDateString() };
+      const tmpNotas = [...savedNotes, tmpNota];
+      setSavedNotes(tmpNotas);
     }
-    setNote(nota)
-  }
+    setNote(nota);
+  };
 
   const deleteNote = (id) => {
-		const newNotes = savedNotes.filter((note) => note.id !== id);
-		setSavedNotes(newNotes);
-	};
+    const newNotes = savedNotes.filter((note) => note.id !== id);
+    setSavedNotes(newNotes);
+  };
 
   const editNote = (id) => {
     const date = new Date();
-		const noteToEdit = savedNotes.filter((note) => note.id == id)[0];
-    setNote({title: noteToEdit.title,text: noteToEdit.text, id: noteToEdit.id,date: date.toLocaleDateString()})
-    setIsEditing(true)
-	};
+    const noteToEdit = savedNotes.filter((note) => note.id == id)[0];
+    setNote({
+      title: noteToEdit.title,
+      text: noteToEdit.text,
+      id: noteToEdit.id,
+      date: date.toLocaleDateString(),
+    });
+    setIsEditing(true);
+  };
 
   return (
-    <>    
-      <div className="container">
-        <GrabarNota language={language} setLanguage={setLanguage} note={note} isListening={isListening} setIsListening={setIsListening} 
-        handleSaveNote={handleSaveNote} handleChange={handleChange}/>
-        <Notas savedNotes={savedNotes} handleDeleteNote={deleteNote} handleEditNote={editNote}/>
-      </div>
-    </>
-  )
+    <div className="container">
+      <GrabarNota
+        language={language}
+        setLanguage={setLanguage}
+        note={note}
+        isListening={isListening}
+        setIsListening={setIsListening}
+        handleSaveNote={handleSaveNote}
+        handleChange={handleChange}
+      />
+      <Notas
+        savedNotes={savedNotes}
+        handleDeleteNote={deleteNote}
+        handleEditNote={editNote}
+      />
+    </div>
+  );
 }
 
-export default Home
+export default Home;
