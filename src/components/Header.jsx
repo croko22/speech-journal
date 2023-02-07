@@ -1,14 +1,16 @@
-import React from 'react'
+import { FaCog, FaFileAlt, FaPlay } from 'react-icons/fa';
+import './Header.scss'
 
-const Header = ({language,setLanguage}) => {
-    const handleChangeL = () => {
-        (language=="es-ES")? setLanguage("en-US") : setLanguage("es-ES") 
-      }
+const Header = () => {
 
   return (
     <div className='header'>
-        <h1>Speech Journal</h1>
-        {(language=="es-ES")?  <button onClick={handleChangeL}> ES </button> :  <button onClick={handleChangeL}> EN </button>}
+        <a className='header-title' href='/'>🎤 Speech Journal</a>
+        <div>
+          <a className='header-link' href="/session"><FaCog/> Journal Session</a>
+          <a className='header-link' href="/"><FaFileAlt/>Saved logs</a>
+          <a className='header-link' href="/"><FaPlay/>Start session</a>
+        </div>
     </div>
   )
 }

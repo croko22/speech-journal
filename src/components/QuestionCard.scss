@@ -1,0 +1,22 @@
+.questionCard {
+    border: 1px solid #000;
+    width: 500px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px;
+    .timeSelectSection{
+        display: flex;
+        justify-content: space-between;
+        .timeSelectLabel{
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .timeSelectInput{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid #000;
+            padding: 0 5px;
+        }  
+    }
+}
