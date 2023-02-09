@@ -46,10 +46,16 @@ input {
 }
 textarea {
 	min-width: 550px;
-	width: 100%;
+	width: 80%;
 	height: 250px;
 	border-radius: 5px;
 	border: none;
+	font: 1em 'Roboto', sans-serif; 
+	padding: 10px;
+	&:focus {
+		outline: none;
+	}
+	resize: none;
 }
 .note {
 	background-color: #eee;

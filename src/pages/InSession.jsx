@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./InSession.scss";
 
 const InSession = () => {
   const storedSessions = JSON.parse(localStorage.getItem("Sessions"));
@@ -20,15 +21,12 @@ const InSession = () => {
   }, [counter]);
 
   return (
-    <div>
-      <h1>InSession</h1>
+    <div className="session-container">
+      <h1 className="session-title">InSession</h1>
       <h2>{questionsPhase}</h2>
       <p className="timer">{counter}</p>
-      {
-        <div key={currentQuestion.id}>
-          <h3>{currentQuestion.question}</h3>
-        </div>
-      }
+      {<h1>{currentQuestion.question}</h1>}
+      <textarea name="text" placeholder="I'm all ears... 👂👂👂"></textarea>
     </div>
   );
 };
