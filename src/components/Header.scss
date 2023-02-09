@@ -15,9 +15,12 @@
         text-decoration: none;
         color: #000;
         font-size: 20px;
-        margin-left: 12px;
+        margin-left: 1rem;
         &:hover {
             color: #555;
+        }
+        .icon {
+            margin-right: 0.5rem;
         }
     }
 }

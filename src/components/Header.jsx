@@ -9,14 +9,14 @@ const Header = () => {
       </a>
       <div>
         <a className="header-link" href="/session">
-          <FaCog /> Journal Session
+          <FaCog className="icon" /> Journal Session
         </a>
         <a className="header-link" href="/">
-          <FaFileAlt />
+          <FaFileAlt className="icon" />
           Saved logs
         </a>
         <a className="header-link" href="/in-session">
-          <FaPlay />
+          <FaPlay className="icon" />
           Start session
         </a>
       </div>
