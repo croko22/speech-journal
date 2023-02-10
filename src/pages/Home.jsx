@@ -4,20 +4,9 @@ import "./Home.scss";
 import GrabarNota from "../components/GrabarNota";
 import Notas from "../components/Notas";
 
-//*WebSpeechAPI
-const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-//TODO: Redireccionar a una pagina de error
-if (!SpeechRecognition)
-  alert("Tu navegador no soporta el reconocimiento de voz");
-const mic = new SpeechRecognition();
-mic.continuous = true;
-mic.interimResults = true;
-
 //*Estructura de Nota
 const nota = { title: "", text: "" };
 function Home() {
-  const [isListening, setIsListening] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [note, setNote] = useState(nota);
   const [savedNotes, setSavedNotes] = useState(
@@ -27,46 +16,6 @@ function Home() {
   useEffect(() => {
     localStorage.setItem("notas", JSON.stringify(savedNotes));
   }, [savedNotes]);
-
-  //* SpeechRecognition Language
-  const [language, setLanguage] = useState("es-ES");
-  mic.lang = language;
-  //? Reconocimiento de voz
-  useEffect(() => {
-    handleListen();
-  }, [isListening]);
-  const handleListen = () => {
-    if (isListening) {
-      mic.start();
-      mic.onend = () => {
-        console.log("continue..");
-        mic.start();
-      };
-    } else {
-      mic.stop();
-      mic.onend = () => {
-        console.log("Stopped Mic on Click");
-      };
-    }
-    mic.onstart = () => {
-      console.log("Mics on");
-    };
-    //Speech recognition
-    mic.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0])
-        .map((result) => result.transcript)
-        .join("");
-      let tmpNota = {
-        ...note,
-        text: note.text + transcript,
-      };
-      setNote(tmpNota);
-      mic.onerror = (event) => {
-        console.log(event.error);
-      };
-    };
-  };
 
   const handleChange = (e) => {
     let tmpNota = { ...note, [e.target.name]: e.target.value };
@@ -108,11 +57,8 @@ function Home() {
   return (
     <div className="container">
       <GrabarNota
-        language={language}
-        setLanguage={setLanguage}
         note={note}
-        isListening={isListening}
-        setIsListening={setIsListening}
+        setNote={setNote}
         handleSaveNote={handleSaveNote}
         handleChange={handleChange}
       />
