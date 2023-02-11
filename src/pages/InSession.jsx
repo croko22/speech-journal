@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { v4 } from "uuid";
 import GrabarNota from "../components/GrabarNota";
 import "./InSession.scss";
 
@@ -10,6 +11,24 @@ const InSession = () => {
   const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
   const [currentQuestion, setCurrentQuestion] = useState(storedSessions[0]);
   const [counter, setCounter] = useState(currentQuestion.timeToThink);
+  //?Handle speech input
+  const [isListening, setIsListening] = useState(false);
+  const [note, setNote] = useState({
+    question: currentQuestion.question,
+    text: "",
+  });
+  const [allNotes, setAllNotes] = useState([]);
+
+  const handleSaveNote = () => {
+    const log = {
+      id: v4(),
+      date: new Date().toLocaleDateString(),
+      QAs: allNotes,
+    };
+    const storedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
+    const tmpLogs = [...storedLogs, log];
+    localStorage.setItem("Logs", JSON.stringify(tmpLogs));
+  };
 
   //? Timer
   useEffect(() => {
@@ -17,6 +36,7 @@ const InSession = () => {
     if (counter === 0 && questionsPhase === "think") {
       setQuestionsPhase(quesTionPhases[1]);
       setCounter(currentQuestion.timeToAnswer);
+      setIsListening(true);
     }
     if (counter === 0 && questionsPhase === "answer") {
       setQuestionsPhase(quesTionPhases[2]);
@@ -27,37 +47,41 @@ const InSession = () => {
       questionsPhase === "next" &&
       index < storedSessions.length
     ) {
+      //? Save note
+      setAllNotes([...allNotes, note]);
+      //? Change question
       setIndex(index + 1);
       setCurrentQuestion(storedSessions[index]);
       setQuestionsPhase(quesTionPhases[0]);
       setCounter(currentQuestion.timeToThink);
+      setIsListening(false);
+      //? Reset note
+      setNote({ question: currentQuestion.question, text: "" });
     } else if (counter === 0 && questionsPhase === "next") {
       setQuestionsPhase(quesTionPhases[3]);
+      setIsListening(false);
+      handleSaveNote();
     }
   }, [counter]);
 
   return (
     <div className="session-container">
-      <h1 className="session-title">InSession</h1>
-      <h2>{questionsPhase}</h2>
+      <h1 className="session-title">
+        {questionsPhase[0].toUpperCase() + questionsPhase.slice(1)}
+      </h1>
       <p className="timer">{counter}</p>
       {<h1>{currentQuestion.question}</h1>}
-      <textarea
-        name="text"
-        placeholder={
-          questionsPhase === "think"
-            ? "Think and reflect for some time..."
-            : questionsPhase === "next"
-            ? "New question incoming"
-            : "I'm all ears... 👂👂👂"
-        }
-      ></textarea>
-      {/* <GrabarNota
+      {questionsPhase === "think"
+        ? "Think and reflect for some time..."
+        : questionsPhase === "next"
+        ? "New question incoming"
+        : "I'm all ears... 👂👂👂"}
+      <GrabarNota
         note={note}
         setNote={setNote}
-        handleSaveNote={handleSaveNote}
-        handleChange={handleChange}
-      /> */}
+        isListening={isListening}
+        setIsListening={setIsListening}
+      />
     </div>
   );
 };
