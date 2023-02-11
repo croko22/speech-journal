@@ -11,7 +11,7 @@ const Header = () => {
         <a className="header-link" href="/session">
           <FaCog className="icon" /> Journal Session
         </a>
-        <a className="header-link" href="/">
+        <a className="header-link" href="/saved-logs">
           <FaFileAlt className="icon" />
           Saved logs
         </a>

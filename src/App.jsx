@@ -3,6 +3,7 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import InSession from "./pages/InSession";
+import SavedLogs from "./pages/SavedLogs";
 import SessionConfig from "./pages/SessionConfig";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/session" element={<SessionConfig />} />
           <Route path="/session/:sessionId" element={<SessionConfig />} />
+          <Route path="/saved-logs" element={<SavedLogs />} />
           <Route path="/in-session" element={<InSession />} />
           <Route path="*" element={<div>404</div>} />
         </Routes>
