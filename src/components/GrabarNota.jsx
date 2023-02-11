@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaMicrophone, FaStop } from "react-icons/fa";
+import "./GrabarNota.scss";
 
 //*WebSpeechAPI
 const SpeechRecognition =
@@ -8,12 +9,17 @@ const mic = new SpeechRecognition();
 mic.continuous = true;
 mic.interimResults = true;
 
-const GrabarNota = ({ note, setNote, handleSaveNote, handleChange }) => {
-  const [isListening, setIsListening] = useState(false);
+const GrabarNota = ({ note, setNote, isListening, setIsListening }) => {
   const handleChangeL = () => {
     language == "es-ES" ? setLanguage("en-US") : setLanguage("es-ES");
   };
 
+  const handleChange = (e) => {
+    let tmpNota = { ...note, [e.target.name]: e.target.value };
+    setNote(tmpNota);
+  };
+
+  //TODO: Create a config file, stores in zustand, ls or idk
   //* SpeechRecognition Language
   const [language, setLanguage] = useState("es-ES");
   mic.lang = language;
@@ -55,27 +61,18 @@ const GrabarNota = ({ note, setNote, handleSaveNote, handleChange }) => {
   };
 
   return (
-    <div className="box">
-      <h2>Grabación de notas</h2>
-      {language == "es-ES" ? (
-        <button onClick={handleChangeL}> ES </button>
-      ) : (
-        <button onClick={handleChangeL}> EN </button>
-      )}
-      {isListening ? <FaMicrophone /> : <FaStop />}
-      <button onClick={handleSaveNote} disabled={!note.title || !note.text}>
-        Guardar Nota
-      </button>
-      <button onClick={() => setIsListening((prevState) => !prevState)}>
-        Start/Stop
-      </button>
-      <input
-        type="text"
-        name="title"
-        className="title"
-        value={note.title}
-        onChange={(e) => handleChange(e)}
-      />
+    <div className="recording-box">
+      <div className="buttons-box">
+        {isListening ? <FaMicrophone /> : <FaStop />}
+        <button onClick={() => setIsListening((prevState) => !prevState)}>
+          Start/Stop
+        </button>
+        {language == "es-ES" ? (
+          <button onClick={handleChangeL}> ES </button>
+        ) : (
+          <button onClick={handleChangeL}> EN </button>
+        )}
+      </div>
       <textarea
         name="text"
         placeholder="Toma notas y luego edita"
