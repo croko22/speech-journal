@@ -7,20 +7,18 @@ import Notas from "../components/Notas";
 //*Estructura de Nota
 const nota = { title: "", text: "" };
 function Home() {
-  const [isEditing, setIsEditing] = useState(false);
-  const [note, setNote] = useState(nota);
   const [savedNotes, setSavedNotes] = useState(
     JSON.parse(localStorage.getItem("notas")) || []
   );
+  const [note, setNote] = useState(nota);
+  const [isEditing, setIsEditing] = useState(false);
+  //?Handle speech input
+  const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("notas", JSON.stringify(savedNotes));
   }, [savedNotes]);
 
-  const handleChange = (e) => {
-    let tmpNota = { ...note, [e.target.name]: e.target.value };
-    setNote(tmpNota);
-  };
   // Gestion de las notas
   const handleSaveNote = () => {
     if (isEditing) {
@@ -56,12 +54,13 @@ function Home() {
 
   return (
     <div className="container">
-      <GrabarNota
+      {/* <GrabarNota
         note={note}
         setNote={setNote}
         handleSaveNote={handleSaveNote}
-        handleChange={handleChange}
-      />
+        isListening={isListening}
+        setIsListening={setIsListening}
+      /> */}
       <Notas
         savedNotes={savedNotes}
         handleDeleteNote={deleteNote}
