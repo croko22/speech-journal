@@ -36,51 +36,47 @@ const InSession = () => {
   //TODO: Arreglar el coso de que muestre 2 veces la primera pregunta y no muestre la ultima
   //? Timer
   useEffect(() => {
-    counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
-    if (counter === 0 && questionsPhase === "think") {
-      setQuestionsPhase(quesTionPhases[1]);
-      setCounter(currentQuestion.timeToAnswer);
-      setIsListening(true);
+  if (counter > 0) {
+    setTimeout(() => setCounter(counter - 1), 1000);
+  } else {
+    switch (questionsPhase) {
+      case "think":
+        setQuestionsPhase(quesTionPhases[1]);
+        setCounter(currentQuestion.timeToAnswer);
+        setIsListening(true);
+        break;
+      case "answer":
+        setQuestionsPhase(quesTionPhases[2]);
+        setCounter(5);
+        setIsListening(false);
+        break;
+      case "next":
+        if (index < storedSessions.length) {
+          setAllNotes([...allNotes, note]);
+          setIndex(index + 1);
+          setCurrentQuestion(storedSessions[index]);
+          setCounter(storedSessions[index].timeToThink);
+          setNote({
+            question: storedSessions[index].question,
+            text: "",
+          });
+          setQuestionsPhase(quesTionPhases[0]);
+        } else {
+          setAllNotes([...allNotes, note]);
+          setQuestionsPhase(quesTionPhases[3]);
+          setCounter(3);
+        }
+        break;
+      case "end":
+        setAllNotes([...allNotes, note]);
+        handleSaveNote();
+        navigate("/saved-logs");
+        break;
+      default:
+        break;
     }
-    if (counter === 0 && questionsPhase === "answer") {
-      setQuestionsPhase(quesTionPhases[2]);
-      setCounter(5);
-      setIsListening(false);
-    }
-    if (
-      counter === 0 &&
-      questionsPhase === "next" &&
-      index < storedSessions.length
-    ) {
-      //? Save note
-      setAllNotes([...allNotes, note]);
-      //? Change question
-      setIndex(index + 1);
-      setCurrentQuestion(storedSessions[index]);
-      setCounter(storedSessions[index].timeToThink);
-      //? Reset note
-      setNote({
-        question: storedSessions[index].question,
-        text: "",
-      });
-      setQuestionsPhase(quesTionPhases[0]);
-    }
-    if (
-      counter === 0 &&
-      questionsPhase === "next" &&
-      index === storedSessions.length - 1
-    ) {
-      // setAllNotes([...allNotes, note]); //? Save note
-      // handleSaveNote();
-      setQuestionsPhase(quesTionPhases[3]);
-      setCounter(3);
-    }
-    if (counter === 0 && questionsPhase === "end") {
-      setAllNotes([...allNotes, note]); //? Save note
-      handleSaveNote();
-      navigate("/saved-logs");
-    }
-  }, [counter]);
+  }
+}, [counter]);
 
   return (
     <div className="session-container">
