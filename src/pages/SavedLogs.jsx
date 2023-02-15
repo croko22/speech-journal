@@ -1,17 +1,23 @@
 import React from "react";
+import "./SavedLogs.scss";
 
 const SavedLogs = () => {
   const savedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
+
+  const deleteLog = (id) => {
+    const tmpLogs = savedLogs.filter((log) => log.id !== id);
+    localStorage.setItem("Logs", JSON.stringify(tmpLogs));
+  };
+
   return (
     <div>
-      <h1>Saved Logs</h1>
-      <ul>
+      <ul className="logs-containter">
         {savedLogs.map((log, index) => (
-          <li key={index}>
-            <p>{log.date}</p>
+          <li className="log-card" key={index}>
+            <p className="date">{log.date}</p>
             {log.QAs.map((qa, index) => (
               <div key={index}>
-                <p>{qa.question}</p>
+                <h5>{qa.question}</h5>
                 <p>{qa.text}</p>
               </div>
             ))}
