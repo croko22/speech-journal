@@ -31,33 +31,48 @@ const SessionConfig = () => {
 
   return (
     <div className="sessionConfig">
-      <h1>Session configuration</h1>
-      {/* //*Rendered QuestionCards*/}
-      {session.map((question) => (
-        <QuestionCard
-          key={question.id}
-          sQuestion={question}
-          deleteQuestion={deleteQuestion}
-          editQuestion={editQuestion}
-        />
-      ))}
-      {addMode ? (
-        <QuestionCard
-          sQuestion={{
-            id: 0,
-            question: "New question",
-            timeToThink: 60,
-            timeToAnswer: 60,
-          }}
-          addQuestion={addQuestion}
-          addMode={addMode}
-          setAddMode={setAddMode}
-        />
-      ) : (
-        <button onClick={() => setAddMode(true)}>
-          <FaPlus /> Add new question
-        </button>
-      )}
+      <div className="sessions-container">
+        <h1>Sessions</h1>
+        {
+          //*Rendered SessionCards
+          session.map((question) => (
+            <div className="session-card">
+              <h2>Session 1</h2>
+              <p>{question.question}</p>
+              <p>Time: {question.timeToAnswer + question.timeToThink}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div className="questions-container">
+        {/* //*Rendered QuestionCards*/}
+        <h1>Questions</h1>
+        {session.map((question) => (
+          <QuestionCard
+            key={question.id}
+            sQuestion={question}
+            deleteQuestion={deleteQuestion}
+            editQuestion={editQuestion}
+          />
+        ))}
+        {addMode ? (
+          <QuestionCard
+            sQuestion={{
+              id: 0,
+              question: "New question",
+              timeToThink: 60,
+              timeToAnswer: 60,
+            }}
+            addQuestion={addQuestion}
+            addMode={addMode}
+            setAddMode={setAddMode}
+          />
+        ) : (
+          <button onClick={() => setAddMode(true)}>
+            <FaPlus /> Add new question
+          </button>
+        )}
+      </div>
     </div>
   );
 };
