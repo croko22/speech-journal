@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
+import { FaTrashAlt, FaRegEdit, FaTimes, FaRegSave } from "react-icons/fa";
 import "./QuestionCard.scss";
 
 const SessionCard = ({
@@ -15,7 +15,14 @@ const SessionCard = ({
     <>
       <div className="questionCard">
         {addMode ? (
-          <button onClick={() => setAddMode(false)}>X</button>
+          <div className="btnsBox">
+            <button className="btn-note">
+              <FaTimes onClick={() => setAddMode(false)} />
+            </button>
+            <button className="btn-note" onClick={() => addQuestion(question)}>
+              <FaRegSave />
+            </button>
+          </div>
         ) : (
           <div>
             <button
@@ -34,7 +41,7 @@ const SessionCard = ({
           onChange={(e) =>
             setQuestion({ ...question, question: e.target.value })
           }
-          className="question"
+          className="questionInput"
           type="text"
           placeholder="Question?"
         />
@@ -59,9 +66,6 @@ const SessionCard = ({
           />
         </div>
       </div>
-      {addMode && (
-        <button onClick={() => addQuestion(question)}>Add question</button>
-      )}
     </>
   );
 };
