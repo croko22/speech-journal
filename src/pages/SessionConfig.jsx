@@ -23,8 +23,8 @@ const SessionConfig = () => {
     setSession(session.filter((question) => question.id !== id));
   };
 
-  //TODO: Fix editQuestion
-  const editQuestion = (question) => {
+  //TODO: updateQuestion | Then implement in MONGO
+  const updateQuestion = (question) => {
     deleteQuestion(question.id);
     addQuestion(question);
   };
@@ -36,7 +36,7 @@ const SessionConfig = () => {
         {
           //*Rendered SessionCards
           session.map((question) => (
-            <div className="session-card">
+            <div className="session-card" key={question.id}>
               <h2>Session 1</h2>
               <p>{question.question}</p>
               <p>Time: {question.timeToAnswer + question.timeToThink}</p>
@@ -52,7 +52,7 @@ const SessionConfig = () => {
             key={question.id}
             sQuestion={question}
             deleteQuestion={deleteQuestion}
-            editQuestion={editQuestion}
+            updateQuestion={updateQuestion}
           />
         ))}
         {addMode ? (
@@ -68,7 +68,7 @@ const SessionConfig = () => {
             setAddMode={setAddMode}
           />
         ) : (
-          <button onClick={() => setAddMode(true)}>
+          <button className="newQuestionBtn" onClick={() => setAddMode(true)}>
             <FaPlus /> Add new question
           </button>
         )}
