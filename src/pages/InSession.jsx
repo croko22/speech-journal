@@ -14,11 +14,11 @@ const InSession = () => {
   const quesTionPhases = ["think", "answer", "next", "end"];
   const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
   //? Timer
-  const [counter, setCounter] = useState(currentQuestion.timeToThink);
+  const [counter, setCounter] = useState(currentQuestion?.timeToThink || 0);
   //?Handle speech input
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState({
-    question: currentQuestion.question,
+    question: currentQuestion?.question || "",
     text: "",
   });
   const [allNotes, setAllNotes] = useState([]);
@@ -37,12 +37,13 @@ const InSession = () => {
   //? Timer
   useEffect(() => {
     if (counter > 0) {
+      if (!currentQuestion) navigate("/session");
       setTimeout(() => setCounter(counter - 1), 1000);
     } else {
       switch (questionsPhase) {
         case "think":
           setQuestionsPhase(quesTionPhases[1]);
-          setCounter(currentQuestion.timeToAnswer);
+          setCounter(currentQuestion?.timeToAnswer);
           setIsListening(true);
           break;
         case "answer":
@@ -88,7 +89,7 @@ const InSession = () => {
         <h1>
           {questionsPhase !== "next" &&
             questionsPhase !== "end" &&
-            currentQuestion.question}
+            currentQuestion?.question}
         </h1>
       }
       {questionsPhase === "think"
