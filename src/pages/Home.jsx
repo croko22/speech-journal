@@ -1,14 +1,8 @@
-import React, { useState, useEffect } from "react";
 import { FaPlay } from "react-icons/fa";
-import { v4 } from "uuid";
 import "./Home.scss";
 
-//*Estructura de Nota
-const nota = { title: "", text: "" };
 function Home() {
-  const [savedLogs, setSavedLogs] = useState(
-    JSON.parse(localStorage.getItem("Logs")) || []
-  );
+  const savedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
 
   return (
     <div className="container">
@@ -25,9 +19,9 @@ function Home() {
         <div className="logs">
           {savedLogs.reverse().map((log, index) => (
             <div className="log" key={index}>
-              <p className="date">{log.date}</p>
+              <small className="date">{log.date}</small>
               {log.QAs.map((qa, index) => (
-                <div key={index}>
+                <div className="qa-item" key={index}>
                   <h5>{qa.question}</h5>
                   <p>{qa.text}</p>
                 </div>

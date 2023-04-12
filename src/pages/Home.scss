@@ -9,7 +9,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   @media screen and (max-width: 768px) {
-	grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
   }
 }
 .box {
@@ -49,9 +49,9 @@ button {
 }
 
 .start-session-container {
-	  display: flex;
-	  align-items: center;
-	  flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   .start-session {
     display: flex;
     align-items: center;
@@ -60,35 +60,38 @@ button {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-	background-color: #eee;
+    background-color: #eee;
+
     .play-icon {
       width: 100px;
       height: 100px;
       margin: 0 auto;
       color: #000;
-		:hover {
-			color: #aaa;
-		}
-	}
+      :hover {
+        color: #aaa;
+      }
+    }
   }
 }
-.recent-logs-container{
+.recent-logs-container {
   height: 150px;
   overflow: auto;
   padding: 20px;
-	@media screen and (max-width: 768px) {
-		display: none
-	}
-  .log{
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+  .log {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
     background-color: #eee;
-    .log-date{
-      font-size: 0.8em;
+    .qa-item {
+      border-left: 1px solid #000;
+      text-align: center;
+      padding-left: 10px;
     }
   }
 }
