@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaMicrophone, FaStop } from "react-icons/fa";
-import "./GrabarNota.scss";
+import "./RecordNote.scss";
 
 //*WebSpeechAPI
 const SpeechRecognition =
@@ -9,7 +9,7 @@ const mic = new SpeechRecognition();
 mic.continuous = true;
 mic.interimResults = true;
 
-const GrabarNota = ({ note, setNote, isListening, setIsListening }) => {
+const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
   const handleChangeL = () => {
     language == "es-ES" ? setLanguage("en-US") : setLanguage("es-ES");
   };
@@ -83,4 +83,4 @@ const GrabarNota = ({ note, setNote, isListening, setIsListening }) => {
   );
 };
 
-export default GrabarNota;
+export default RecordNote;

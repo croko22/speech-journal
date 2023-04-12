@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
-import GrabarNota from "../components/GrabarNota";
+import RecordNote from "../components/RecordNote";
 import "./InSession.scss";
 
 const InSession = () => {
@@ -34,7 +34,6 @@ const InSession = () => {
     localStorage.setItem("Logs", JSON.stringify(tmpLogs));
   };
 
-  //TODO: Arreglar el coso de que muestre 2 veces la primera pregunta y no muestre la ultima
   //? Timer
   useEffect(() => {
     if (counter > 0) {
@@ -97,7 +96,7 @@ const InSession = () => {
         : questionsPhase === "next"
         ? "New question incoming"
         : "I'm all ears... 👂👂👂"}
-      <GrabarNota
+      <RecordNote
         note={note}
         setNote={setNote}
         isListening={isListening}
