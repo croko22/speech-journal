@@ -5,11 +5,18 @@ import "./RecordNote.scss";
 //*WebSpeechAPI
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
-const mic = new SpeechRecognition();
-mic.continuous = true;
-mic.interimResults = true;
+
+const mic = SpeechRecognition ? new SpeechRecognition() : null;
+if (mic) {
+  mic.continuous = true;
+  mic.interimResults = true;
+}
 
 const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
+  if (!(window.SpeechRecognition || window.webkitSpeechRecognition)) {
+    return <div>Browser does not support Speech Recognition</div>;
+  }
+
   const handleChangeL = () => {
     language == "es-ES" ? setLanguage("en-US") : setLanguage("es-ES");
   };
