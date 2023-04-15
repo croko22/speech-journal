@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 } from "uuid";
 import RecordNote from "../components/RecordNote";
 import "./InSession.scss";
+import axios from "axios";
 
 const InSession = () => {
   const navigate = useNavigate();
@@ -19,19 +19,29 @@ const InSession = () => {
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState({
     question: currentQuestion?.question || "",
-    text: "",
+    answer: "",
   });
   const [allNotes, setAllNotes] = useState([]);
-
+  //TODO: Send notes to backend
   const handleSaveNote = () => {
     const log = {
-      id: v4(),
-      date: new Date().toLocaleDateString(),
-      QAs: allNotes,
+      qas: allNotes,
+      user: JSON.parse(localStorage.getItem("authData"))._id,
     };
     const storedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
     const tmpLogs = [...storedLogs, log];
     localStorage.setItem("Logs", JSON.stringify(tmpLogs));
+    const saveNote = async () => {
+      const response = await axios.post(
+        "http://localhost:3000/journal-entries",
+        {
+          qas: allNotes,
+          user: JSON.parse(localStorage.getItem("authData"))._id,
+        }
+      );
+      // console.log(response);
+    };
+    saveNote();
   };
 
   //? Timer
@@ -59,7 +69,7 @@ const InSession = () => {
             setCounter(storedSessions[index].timeToThink);
             setNote({
               question: storedSessions[index].question,
-              text: "",
+              answer: "",
             });
             setQuestionsPhase(quesTionPhases[0]);
           } else {

@@ -58,7 +58,7 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
         .join("");
       let tmpNota = {
         ...note,
-        text: note.text + transcript,
+        answer: note.answer + transcript,
       };
       setNote(tmpNota);
       mic.onerror = (event) => {
@@ -81,9 +81,9 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
         )}
       </div>
       <textarea
-        name="text"
+        name="answer"
         placeholder="Toma notas y luego edita"
-        value={note.text}
+        value={note.answer}
         onChange={(e) => handleChange(e)}
       ></textarea>
     </div>

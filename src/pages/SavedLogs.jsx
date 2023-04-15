@@ -18,17 +18,18 @@ const SavedLogs = () => {
 
   return (
     <div>
+      <h1>Saved logs</h1>
       <ul className="logs-containter">
         {savedLogs.map((log, index) => (
           <li className="log-card" key={index}>
             <p className="date">
-              {log.date}
+              {/* {log.date} */}
               <FaTrashAlt onClick={() => deleteLog(log.id)} />
             </p>
-            {log.QAs.map((qa, index) => (
+            {log.qas.map((qa, index) => (
               <div key={index}>
                 <h5>{qa.question}</h5>
-                <p>{qa.text}</p>
+                <p>{qa.answer}</p>
               </div>
             ))}
           </li>
