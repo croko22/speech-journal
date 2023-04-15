@@ -11,14 +11,12 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
-    //TODO: Hacer una store de la data en sustand
     <>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <Header />
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/" element={<Landing />} />
-            {/* //TODO: Protect Auth routes */}
             <Route
               path="/home"
               element={
@@ -53,8 +51,8 @@ function App() {
             />
             <Route path="*" element={<div>404</div>} />
           </Routes>
+          <Footer />
         </BrowserRouter>
-        <Footer />
       </GoogleOAuthProvider>
     </>
   );
