@@ -1,26 +1,43 @@
+import { NavLink } from "react-router-dom";
 import { FaCog, FaFileAlt, FaPlay } from "react-icons/fa";
 import "./Header.scss";
 
 const Header = () => {
   return (
-    <div className="header">
+    <header>
       <a className="header-title" href="/">
         🎤 Speech Journal
       </a>
-      <div>
-        <a className="header-link" href="/session">
-          <FaCog className="icon" /> Journal Session
-        </a>
-        <a className="header-link" href="/saved-logs">
+      <nav>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-header-link" : "header-link"
+          }
+          to="/session"
+        >
+          <FaCog className="icon" />
+          <span>Journal Session</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-header-link" : "header-link"
+          }
+          to="/saved-logs"
+        >
           <FaFileAlt className="icon" />
-          Saved logs
-        </a>
-        <a className="header-link" href="/in-session">
+          <span>Saved logs</span>
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-header-link" : "header-link"
+          }
+          to="/in-session"
+        >
           <FaPlay className="icon" />
-          Start session
-        </a>
-      </div>
-    </div>
+          <span>Start session</span>
+        </NavLink>
+      </nav>
+    </header>
   );
 };
 
