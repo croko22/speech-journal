@@ -1,12 +1,11 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useStore } from "../hooks/useStore";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useStore } from "../hooks/useStore";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const Landing = () => {
   const setAuthData = useStore((state) => state.setAuthData);
-
   const authData = useStore((state) => state.authData);
   const navigate = useNavigate();
 
@@ -15,8 +14,7 @@ const Landing = () => {
   }, [authData, navigate]);
 
   return (
-    <div>
-      <a href="login">Login</a>
+    <div className="container">
       <h1>Speech journal</h1>
       <p>
         Speech journal is a tool to help you improve your speech and
