@@ -32,14 +32,10 @@ const InSession = () => {
     const tmpLogs = [...storedLogs, log];
     localStorage.setItem("Logs", JSON.stringify(tmpLogs));
     const saveNote = async () => {
-      const response = await axios.post(
-        "http://localhost:3000/journal-entries",
-        {
-          qas: allNotes,
-          user: JSON.parse(localStorage.getItem("authData"))._id,
-        }
-      );
-      // console.log(response);
+      await axios.post("http://localhost:3000/journal-entries", {
+        qas: allNotes,
+        user: JSON.parse(localStorage.getItem("authData"))._id,
+      });
     };
     saveNote();
   };
