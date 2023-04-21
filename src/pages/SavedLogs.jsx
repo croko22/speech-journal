@@ -22,6 +22,7 @@ const SavedLogs = () => {
     fetchLogs();
   }, []);
 
+  //TODO: Probar optimistic update with react-query
   const deleteLog = async (id) => {
     console.log(id);
     await axios.delete(`http://localhost:3000/journal-entries/${id}`);
