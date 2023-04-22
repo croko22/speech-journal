@@ -39,7 +39,12 @@ const SessionConfig = () => {
             <div className="session-card" key={question.id}>
               <h2>Session 1</h2>
               <p>{question.question}</p>
-              <p>Time: {question.timeToAnswer + question.timeToThink}</p>
+              <p>
+                Time:{" "}
+                {parseInt(question.timeToAnswer) +
+                  parseInt(question.timeToThink)}
+                {"s"}
+              </p>
             </div>
           ))
         }
@@ -60,8 +65,8 @@ const SessionConfig = () => {
             sQuestion={{
               id: 0,
               question: "New question",
-              timeToThink: 60,
-              timeToAnswer: 60,
+              timeToThink: 15,
+              timeToAnswer: 15,
             }}
             addQuestion={addQuestion}
             addMode={addMode}

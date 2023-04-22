@@ -36,6 +36,17 @@ const Header = () => {
           <FaPlay className="icon" />
           <span>Start session</span>
         </NavLink>
+        {window.localStorage.getItem("authData") && (
+          <button
+            className="logout"
+            onClick={() => {
+              window.localStorage.removeItem("authData");
+              window.location.reload();
+            }}
+          >
+            Logout
+          </button>
+        )}
       </nav>
     </header>
   );

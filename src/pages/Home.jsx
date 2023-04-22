@@ -19,11 +19,11 @@ function Home() {
         <div className="logs">
           {savedLogs.reverse().map((log, index) => (
             <div className="log" key={index}>
-              <small className="date">{log.date}</small>
-              {log.QAs.map((qa, index) => (
+              {/* <small className="date">{log.date}</small> */}
+              {log.qas.map((qa, index) => (
                 <div className="qa-item" key={index}>
                   <h5>{qa.question}</h5>
-                  <p>{qa.text}</p>
+                  <p>{qa.answer}</p>
                 </div>
               ))}
             </div>
