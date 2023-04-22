@@ -31,6 +31,7 @@ const InSession = () => {
     const storedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
     const tmpLogs = [...storedLogs, log];
     localStorage.setItem("Logs", JSON.stringify(tmpLogs));
+    //? Send to backend
     const saveNote = async () => {
       await axios.post("http://localhost:3000/journal-entries", {
         qas: allNotes,
