@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../hooks/useStore";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import "./Landing.scss";
 
 const Landing = () => {
   const setAuthData = useStore((state) => state.setAuthData);
@@ -14,17 +15,18 @@ const Landing = () => {
   }, [authData, navigate]);
 
   return (
-    <div className="container">
+    <div className="landing-container">
       <h1>Speech journal</h1>
-      <p>
+      <p className="hero-text">
         Speech journal is a tool to help you improve your speech and
-        communication skills.
+        communication skills while journaling.
       </p>
       <p>
         It allows you to record your speech and then analyze it to find out what
         you can improve.
       </p>
       <p>It also allows you to save your sessions and review them later.</p>
+      <img className="hero-img" src="/speech-journal-hero.png" alt="hero" />
       <GoogleLogin
         onSuccess={async (credentialResponse) => {
           const response = await axios.post("http://localhost:3000/login", {
