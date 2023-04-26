@@ -1,12 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../hooks/useStore";
-import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+
 import "./Landing.scss";
 
 const Landing = () => {
-  const setAuthData = useStore((state) => state.setAuthData);
   const authData = useStore((state) => state.authData);
   const navigate = useNavigate();
 
@@ -16,7 +14,7 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
-      <h1>Speech journal</h1>
+      <h1>🎤 Speech journal 🎤</h1>
       <p className="hero-text">
         Speech journal is a tool to help you improve your speech and
         communication skills while journaling.
@@ -27,20 +25,6 @@ const Landing = () => {
       </p>
       <p>It also allows you to save your sessions and review them later.</p>
       <img className="hero-img" src="/speech-journal-hero.png" alt="hero" />
-      <GoogleLogin
-        onSuccess={async (credentialResponse) => {
-          const response = await axios.post("http://localhost:3000/login", {
-            token: credentialResponse.credential,
-          });
-          const data = response.data;
-          localStorage.setItem("authData", JSON.stringify(data));
-
-          setAuthData(data);
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-      />
     </div>
   );
 };
