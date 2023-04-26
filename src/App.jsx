@@ -8,6 +8,8 @@ import SessionConfig from "./pages/SessionConfig";
 import Landing from "./pages/Landing";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import Page404 from "./pages/Page404/Page404";
+import Auth from "./pages/Auth/Auth";
 
 function App() {
   return (
@@ -49,7 +51,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<div>404</div>} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
           <Footer />
         </BrowserRouter>

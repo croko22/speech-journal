@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+.hiden_fuse*
 
 # Editor directories and files
 .vscode/*
