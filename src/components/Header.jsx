@@ -8,35 +8,35 @@ const Header = () => {
       <a className="header-title" href="/">
         🎤 Speech Journal
       </a>
-      <nav>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "active-header-link" : "header-link"
-          }
-          to="/session"
-        >
-          <FaCog className="icon" />
-          <span>Journal Session</span>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "active-header-link" : "header-link"
-          }
-          to="/saved-logs"
-        >
-          <FaFileAlt className="icon" />
-          <span>Saved logs</span>
-        </NavLink>
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "active-header-link" : "header-link"
-          }
-          to="/in-session"
-        >
-          <FaPlay className="icon" />
-          <span>Start session</span>
-        </NavLink>
-        {window.localStorage.getItem("authData") && (
+      {window.localStorage.getItem("authData") ? (
+        <nav>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active-header-link" : "header-link"
+            }
+            to="/session"
+          >
+            <FaCog className="icon" />
+            <span>Journal Session</span>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active-header-link" : "header-link"
+            }
+            to="/saved-logs"
+          >
+            <FaFileAlt className="icon" />
+            <span>Saved logs</span>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active-header-link" : "header-link"
+            }
+            to="/in-session"
+          >
+            <FaPlay className="icon" />
+            <span>Start session</span>
+          </NavLink>
           <button
             className="logout"
             onClick={() => {
@@ -46,8 +46,14 @@ const Header = () => {
           >
             Logout
           </button>
-        )}
-      </nav>
+        </nav>
+      ) : (
+        <nav>
+          <a className="login" href="/auth">
+            Login
+          </a>
+        </nav>
+      )}
     </header>
   );
 };
