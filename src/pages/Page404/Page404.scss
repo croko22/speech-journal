@@ -1,0 +1,88 @@
+* {
+  font-family: Google sans, Arial;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  color: white;
+  animation: colorSlide 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+
+  .text-center {
+    text-align: center;
+    h1,
+    h3 {
+      margin: 30px;
+      cursor: default;
+
+      .fade-in {
+        animation: fadeIn 2s ease infinite;
+      }
+    }
+
+    h1 {
+      font-size: 8em;
+      transition: font-size 200ms ease-in-out;
+      border-bottom: 1px dashed white;
+
+      span#digit1 {
+        animation-delay: 200ms;
+      }
+      span#digit2 {
+        animation-delay: 300ms;
+      }
+      span#digit3 {
+        animation-delay: 400ms;
+      }
+    }
+
+    .button {
+      border: 1px solid white;
+      background: transparent;
+      outline: none;
+      padding: 10px 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      transition: background-color 200ms ease-in;
+      margin: 20px 50px;
+      text-decoration: none;
+
+      &:hover {
+        background-color: white;
+        color: #555;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@keyframes colorSlide {
+  0% {
+    background-color: #aeb5c9;
+  }
+  50% {
+    background-color: rgb(86, 95, 122);
+  }
+  100% {
+    background-color: #bfcbec;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
