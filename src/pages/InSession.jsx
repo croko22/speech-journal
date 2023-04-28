@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import RecordNote from "../components/RecordNote";
 import "./InSession.scss";
-import axios from "axios";
 
 const InSession = () => {
   const navigate = useNavigate();
   //? Get stored sessions
   const storedSessions = JSON.parse(localStorage.getItem("Sessions"));
+  //TODO: Use a stack instead of an index to get the current question
   const [index, setIndex] = useState(1);
   const [currentQuestion, setCurrentQuestion] = useState(storedSessions[0]);
   //? Question phases (Think, answer, next)
@@ -15,30 +16,21 @@ const InSession = () => {
   const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
   //? Timer
   const [counter, setCounter] = useState(currentQuestion?.timeToThink || 0);
-  //?Handle speech input
+  //? Handle speech input
   const [isListening, setIsListening] = useState(false);
+  //* Note
   const [note, setNote] = useState({
     question: currentQuestion?.question || "",
     answer: "",
   });
   const [allNotes, setAllNotes] = useState([]);
-  //TODO: Send notes to backend
-  const handleSaveNote = () => {
-    const log = {
+
+  //? Send to backend
+  const saveNote = async () => {
+    await axios.post("http://localhost:3000/journal-entries", {
       qas: allNotes,
       user: JSON.parse(localStorage.getItem("authData"))._id,
-    };
-    const storedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
-    const tmpLogs = [...storedLogs, log];
-    localStorage.setItem("Logs", JSON.stringify(tmpLogs));
-    //? Send to backend
-    const saveNote = async () => {
-      await axios.post("http://localhost:3000/journal-entries", {
-        qas: allNotes,
-        user: JSON.parse(localStorage.getItem("authData"))._id,
-      });
-    };
-    saveNote();
+    });
   };
 
   //? Timer
@@ -54,30 +46,27 @@ const InSession = () => {
           setIsListening(true);
           break;
         case "answer":
-          setQuestionsPhase(quesTionPhases[2]);
+          if (index < storedSessions.length)
+            setQuestionsPhase(quesTionPhases[2]);
+          else setQuestionsPhase(quesTionPhases[3]);
           setCounter(5);
           setIsListening(false);
+          setAllNotes([...allNotes, note]);
           break;
         case "next":
-          if (index < storedSessions.length) {
-            setAllNotes([...allNotes, note]);
-            setIndex(index + 1);
-            setCurrentQuestion(storedSessions[index]);
-            setCounter(storedSessions[index].timeToThink);
-            setNote({
-              question: storedSessions[index].question,
-              answer: "",
-            });
-            setQuestionsPhase(quesTionPhases[0]);
-          } else {
-            setAllNotes([...allNotes, note]);
-            setQuestionsPhase(quesTionPhases[3]);
-            setCounter(3);
-          }
+          setIndex(index + 1);
+          setCounter(storedSessions[index].timeToThink);
+          //? Set current question
+          setCurrentQuestion(storedSessions[index]);
+          setNote({
+            question: storedSessions[index].question,
+            answer: "",
+          });
+          setQuestionsPhase(quesTionPhases[0]);
           break;
         case "end":
           setAllNotes([...allNotes, note]);
-          handleSaveNote();
+          saveNote();
           navigate("/saved-logs");
           break;
         default:

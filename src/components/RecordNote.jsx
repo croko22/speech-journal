@@ -5,7 +5,6 @@ import "./RecordNote.scss";
 //*WebSpeechAPI
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
-
 const mic = SpeechRecognition ? new SpeechRecognition() : null;
 if (mic) {
   mic.continuous = true;
@@ -13,17 +12,25 @@ if (mic) {
 }
 
 const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
-  if (!(window.SpeechRecognition || window.webkitSpeechRecognition)) {
-    return <div>Browser does not support Speech Recognition</div>;
+  if (!SpeechRecognition) {
+    return (
+      <div className="recording-box">
+        <p>Browser does not support Speech Recognition</p>
+        <textarea
+          name="answer"
+          placeholder="Toma notas y luego edita"
+          value={note.answer}
+          onChange={(e) =>
+            setNote({ ...note, [e.target.name]: e.target.value })
+          }
+          disabled={!isListening}
+        ></textarea>
+      </div>
+    );
   }
 
   const handleChangeL = () => {
     language == "es-ES" ? setLanguage("en-US") : setLanguage("es-ES");
-  };
-
-  const handleChange = (e) => {
-    let tmpNota = { ...note, [e.target.name]: e.target.value };
-    setNote(tmpNota);
   };
 
   //TODO: Create a config file, stores in zustand, ls or idk
@@ -34,36 +41,22 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
   useEffect(() => {
     handleListen();
   }, [isListening]);
+
   const handleListen = () => {
-    if (isListening) {
-      mic.start();
-      mic.onend = () => {
-        console.log("continue..");
-        mic.start();
-      };
-    } else {
-      mic.stop();
-      mic.onend = () => {
-        console.log("Stopped Mic on Click");
-      };
-    }
-    mic.onstart = () => {
-      console.log("Mics on");
-    };
+    if (isListening) mic.start();
+    else mic.stop();
+
     //?Speech recognition
-    mic.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0])
-        .map((result) => result.transcript)
+    mic.onresult = (e) => {
+      const transcript = Array.from(e.results)
+        .map((result) => result[0].transcript)
         .join("");
+
       let tmpNota = {
         ...note,
         answer: note.answer + transcript,
       };
       setNote(tmpNota);
-      mic.onerror = (event) => {
-        console.log(event.error);
-      };
     };
   };
 
@@ -72,19 +65,18 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
       <div className="buttons-box">
         {isListening ? <FaMicrophone /> : <FaStop />}
         <button onClick={() => setIsListening((prevState) => !prevState)}>
-          Start/Stop
+          {isListening ? "Stop" : "Start"}
         </button>
-        {language == "es-ES" ? (
-          <button onClick={handleChangeL}> ES </button>
-        ) : (
-          <button onClick={handleChangeL}> EN </button>
-        )}
+        <button onClick={handleChangeL}>
+          {language == "es-ES" ? "🇪🇸" : "🇺🇸"}
+        </button>
       </div>
       <textarea
         name="answer"
         placeholder="Toma notas y luego edita"
         value={note.answer}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => setNote({ ...note, [e.target.name]: e.target.value })}
+        disabled={!isListening}
       ></textarea>
     </div>
   );
