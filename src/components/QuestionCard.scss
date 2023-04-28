@@ -1,11 +1,21 @@
 .questionCard {
-  max-width: 500px;
-  width: 100%;
-  height: 10rem;
+  width: 500px;
+  height: 7rem;
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+  .btn-note {
+    float: right;
+    margin: 0 5px;
+    border: none;
+    font-size: 1em;
+    color: #000;
+    cursor: pointer;
+  }
   .questionInput {
     border: none;
     font-size: 16px;
@@ -18,15 +28,14 @@
   }
   .timeSelectSection {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    gap: 10px;
     .timeSelectLabel {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: bold;
     }
     .timeSelectInput {
-      width: 100px;
+      width: 50px;
       height: 30px;
       border-radius: 5px;
       border: 1px solid #000;
