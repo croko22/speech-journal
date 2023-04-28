@@ -24,14 +24,13 @@ const SessionConfig = () => {
   };
 
   //TODO: updateQuestion | Then implement in MONGO
-  const updateQuestion = (question) => {
-    deleteQuestion(question.id);
-    addQuestion(question);
+  const updateQuestion = (id, question) => {
+    setSession(session.map((q) => (q.id === id ? question : q)));
   };
 
   return (
     <div className="sessionConfig">
-      <div className="sessions-container">
+      <div className="sessions-container box">
         <h1>Sessions</h1>
         {
           //*Rendered SessionCards
@@ -49,7 +48,7 @@ const SessionConfig = () => {
           ))
         }
       </div>
-      <div className="questions-container">
+      <div className="questions-container box">
         {/* //*Rendered QuestionCards*/}
         <h1>Questions</h1>
         {session.map((question) => (
