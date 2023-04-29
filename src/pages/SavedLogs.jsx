@@ -16,21 +16,18 @@ const SavedLogs = () => {
           JSON.parse(localStorage.getItem("authData"))._id
         }`
       );
-      // console.log(res.data);
       setSavedLogs(res.data);
     };
     fetchLogs();
   }, []);
 
-  //TODO: Probar optimistic update with react-query
   const deleteLogMutation = useMutation({
     mutationFn: (id) =>
       axios.delete(`http://localhost:3000/journal-entries/${id}`),
     onMutate: (id) => {
-      const oldLogs = savedLogs;
-      const newLogs = oldLogs.filter((log) => log._id !== id);
+      const newLogs = savedLogs.filter((log) => log._id !== id);
       setSavedLogs(newLogs);
-      return () => setSavedLogs(oldLogs);
+      return () => setSavedLogs(newLogs);
     },
     onError: (err, id, rollback) => rollback(),
     onSettled: () => queryClient.invalidateQueries("savedLogs"),
