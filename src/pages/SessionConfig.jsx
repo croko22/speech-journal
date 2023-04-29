@@ -1,82 +1,77 @@
 import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
-import { v4 } from "uuid";
-import QuestionCard from "../components/QuestionCard";
+import axios from "axios";
+import SessionCard from "../components/SessionCard/SessionCard";
+import ActiveSession from "../components/ActiveSession/ActiveSession";
 import "./SessionConfig.scss";
 
 const SessionConfig = () => {
-  const storedSessions = JSON.parse(localStorage.getItem("Sessions"));
-  const [session, setSession] = useState(storedSessions || []);
-  const [addMode, setAddMode] = useState(false);
+  const [savedSessions, setSavedSessions] = useState([]);
+  const [addSessionMode, setAddSessionMode] = useState(false);
+  const [activeSession, setActiveSession] = useState({});
 
+  const templateSession = {
+    _id: 0,
+    name: "New session",
+    questions: [],
+  };
+
+  //?Query DB for sessions
   useEffect(() => {
-    localStorage.setItem("Sessions", JSON.stringify(session));
-  }, [session]);
-
-  const addQuestion = (question) => {
-    let tmpQuestion = { ...question, id: v4() };
-    setSession([...session, tmpQuestion]);
-    setAddMode(false);
-  };
-
-  const deleteQuestion = (id) => {
-    setSession(session.filter((question) => question.id !== id));
-  };
-
-  //TODO: updateQuestion | Then implement in MONGO
-  const updateQuestion = (id, question) => {
-    setSession(session.map((q) => (q.id === id ? question : q)));
-  };
+    const fetchLogs = async () => {
+      const res = await axios.get(
+        `http://localhost:3000/journal-sessions/${
+          JSON.parse(localStorage.getItem("authData"))._id
+        }`
+      );
+      setSavedSessions(res.data);
+      setActiveSession(res.data[0]);
+    };
+    fetchLogs();
+  }, []);
 
   return (
     <div className="sessionConfig">
+      {/* //TODO: Split into a new component */}
       <div className="sessions-container box">
-        <h1>Sessions</h1>
+        <h1>Journal Sessions</h1>
         {
           //*Rendered SessionCards
-          session.map((question) => (
-            <div className="session-card" key={question.id}>
-              <h2>Session 1</h2>
-              <p>{question.question}</p>
-              <p>
-                Time:{" "}
-                {parseInt(question.timeToAnswer) +
-                  parseInt(question.timeToThink)}
-                {"s"}
-              </p>
-            </div>
+          savedSessions.map((session) => (
+            <SessionCard
+              key={session._id}
+              session={session}
+              activeSession={activeSession}
+              setActiveSession={setActiveSession}
+            />
           ))
         }
-      </div>
-      <div className="questions-container box">
-        {/* //*Rendered QuestionCards*/}
-        <h1>Questions</h1>
-        {session.map((question) => (
-          <QuestionCard
-            key={question.id}
-            sQuestion={question}
-            deleteQuestion={deleteQuestion}
-            updateQuestion={updateQuestion}
-          />
-        ))}
-        {addMode ? (
-          <QuestionCard
-            sQuestion={{
-              id: 0,
-              question: "New question",
-              timeToThink: 15,
-              timeToAnswer: 15,
-            }}
-            addQuestion={addQuestion}
-            addMode={addMode}
-            setAddMode={setAddMode}
+        {addSessionMode ? (
+          <SessionCard
+            key={0}
+            session={templateSession}
+            addSessionMode={addSessionMode}
+            setAddSessionMode={setAddSessionMode}
+            setActiveSession={setActiveSession}
           />
         ) : (
-          <button className="newQuestionBtn" onClick={() => setAddMode(true)}>
-            <FaPlus /> Add new question
+          <button
+            className="newSessionBtn"
+            onClick={() => {
+              setActiveSession(templateSession);
+              setAddSessionMode(true);
+            }}
+          >
+            <FaPlus /> Add new session
           </button>
         )}
       </div>
+      <ActiveSession
+        activeSession={activeSession}
+        setActiveSession={setActiveSession}
+        savedSessions={savedSessions}
+        setSavedSessions={setSavedSessions}
+      />
     </div>
   );
 };

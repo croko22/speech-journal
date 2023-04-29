@@ -1,6 +1,7 @@
 .sessionConfig {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 50px;
   margin-top: 50px;
   .sessions-container {
     display: flex;
@@ -13,6 +14,14 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+      &:hover {
+        cursor: pointer;
+        border: #000 solid 2px;
+      }
+    }
+    .session-card.active {
+      background-color: #000;
+      color: #fff;
     }
     @media screen and (max-width: 767px) {
       display: none;
@@ -25,8 +34,16 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    .qc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .newQuestionBtn {
-      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       height: 3rem;
       border-radius: 5px;
       border: none;
