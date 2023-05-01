@@ -117,7 +117,7 @@ const SessionCard = ({
         <label className="timeSelectLabel">Time to think: </label>
         <input
           onChange={(e) =>
-            setQuestion({ ...question, timeToThink: e.target.value })
+            setQuestion({ ...question, timeToThink: parseInt(e.target.value) })
           }
           className="timeSelectInput"
           type="number"
@@ -126,7 +126,7 @@ const SessionCard = ({
         <label className="timeSelectLabel">Time to answer: </label>
         <input
           onChange={(e) =>
-            setQuestion({ ...question, timeToAnswer: e.target.value })
+            setQuestion({ ...question, timeToAnswer: parseInt(e.target.value) })
           }
           className="timeSelectInput"
           type="number"
