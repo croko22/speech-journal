@@ -44,7 +44,7 @@ function App() {
               }
             />
             <Route
-              path="/in-session"
+              path="/in-session/:sessionId"
               element={
                 <ProtectedRoute>
                   <InSession />
