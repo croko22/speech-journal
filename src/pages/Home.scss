@@ -46,24 +46,46 @@ body {
 
 .start-session-container {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  gap: 30px;
   .start-session {
     display: flex;
     align-items: center;
-    margin: auto;
     padding: 20px;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     background-color: #eee;
 
     .play-icon {
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       margin: 0 auto;
       color: #000;
       :hover {
+        color: #aaa;
+      }
+    }
+  }
+  .dropdown {
+    font-size: 1.5rem;
+    .dropdown-menu {
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #eee;
+      div {
+        &:hover {
+          cursor: pointer;
+          color: #aaa;
+        }
+      }
+    }
+    .dropdown-placeholder {
+      padding: 10px;
+      font-size: 2rem;
+      &:hover {
+        cursor: pointer;
         color: #aaa;
       }
     }
