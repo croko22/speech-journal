@@ -1,8 +1,9 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FaPlay } from "react-icons/fa";
-import axios from "axios";
 import Dropdown from "react-dropdown";
+import axios from "axios";
 import "./Home.scss";
 
 function useSessions() {
@@ -22,7 +23,20 @@ function useSessions() {
 function Home() {
   const navigate = useNavigate();
   const { status, data } = useSessions();
-  const savedLogs = JSON.parse(localStorage.getItem("Logs")) || [];
+  const [savedLogs, setSavedLogs] = useState([]);
+
+  //* Fetch logs from DB
+  useEffect(() => {
+    const fetchLogs = async () => {
+      const res = await axios.get(
+        `http://localhost:3000/journal-entries/${
+          JSON.parse(localStorage.getItem("authData"))._id
+        }`
+      );
+      setSavedLogs(res.data);
+    };
+    fetchLogs();
+  }, []);
 
   return (
     <div className="container">
@@ -53,7 +67,7 @@ function Home() {
         <div className="logs">
           {savedLogs.reverse().map((log, index) => (
             <div className="log" key={index}>
-              {/* <small className="date">{log.date}</small> */}
+              <small className="date">{log.dateAdded.slice(0, 10)}</small>
               {log.qas.map((qa, index) => (
                 <div className="qa-item" key={index}>
                   <h5>{qa.question}</h5>
