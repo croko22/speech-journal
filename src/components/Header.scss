@@ -56,7 +56,11 @@ header {
       color: #000;
       font-size: 1rem;
       border-left: 1px solid #000;
-      padding: 0 20px;
+      padding: 5px 20px;
+      .icon {
+        margin-right: 0.5rem;
+        font-size: large;
+      }
       &:hover {
         color: #555;
       }
@@ -65,25 +69,12 @@ header {
         border-left: none;
       }
     }
-    .active-header-link {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      text-decoration: none;
-      color: #000;
-      font-size: 1rem;
-      border-left: 1px solid #000;
-      padding: 0 20px;
+    .header-link.active {
       border-bottom: 2px solid #000;
       @media screen and (max-width: 767px) {
         border-bottom: none;
-        border-left: none;
         color: #555;
       }
-    }
-    .icon {
-      margin-right: 0.5rem;
-      font-size: large;
     }
     .login,
     .logout {

@@ -12,27 +12,24 @@ const Header = () => {
         {window.localStorage.getItem("authData") ? (
           <>
             <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-header-link" : "header-link"
-              }
+              className={`header-link ${({ isActive }) =>
+                isActive ? "active-header-link" : ""}`}
               to="/session"
             >
               <FaCog className="icon" />
               <span>Journal Session</span>
             </NavLink>
             <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-header-link" : "header-link"
-              }
+              className={`header-link ${({ isActive }) =>
+                isActive ? "active-header-link" : ""}`}
               to="/saved-logs"
             >
               <FaFileAlt className="icon" />
               <span>Saved logs</span>
             </NavLink>
             <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-header-link" : "header-link"
-              }
+              className={`header-link ${({ isActive }) =>
+                isActive ? "active-header-link" : ""}`}
               to="/in-session"
             >
               <FaPlay className="icon" />
