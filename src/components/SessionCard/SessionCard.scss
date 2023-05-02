@@ -1,0 +1,33 @@
+.session-card {
+  .session-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .btn-container {
+      display: flex;
+      gap: 10px;
+    }
+  }
+  .sessionInput {
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+    resize: none;
+    background: none;
+  }
+}
+
+.session-card.active .sessionInput {
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+  resize: none;
+  background: none;
+  color: #fff;
+  &:focus {
+    outline: none;
+    color: #fff;
+  }
+}

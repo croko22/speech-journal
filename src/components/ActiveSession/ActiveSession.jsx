@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaPlus, FaRegSave } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import QuestionCard from "../QuestionCard";
 
 const ActiveSession = ({
@@ -20,11 +20,10 @@ const ActiveSession = ({
 
   return (
     <div className="questions-container box">
-      {/* //*Rendered QuestionCards*/}
       <div className="qc-header">
         <h1>{activeSession.name}</h1>
-        <FaRegSave />
       </div>
+      {/* //*Rendered QuestionCards*/}
       {activeSession?.questions?.map((question) => (
         <QuestionCard
           key={question.id}

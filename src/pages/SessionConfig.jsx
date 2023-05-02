@@ -19,7 +19,7 @@ const SessionConfig = () => {
       setSavedSessions(res.data);
     };
     fetchLogs();
-  }, [activeSession]);
+  }, [activeSession, savedSessions]);
 
   return (
     <div className="sessionConfig">
