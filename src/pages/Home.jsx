@@ -36,14 +36,10 @@ function Home() {
           "Loading..."
         ) : (
           <Dropdown
-            options={data.map((session) => session.name)}
-            onChange={(e) =>
-              navigate(
-                `/in-session/${
-                  data.filter((session) => session.name === e.value)[0]._id
-                }`
-              )
-            }
+            options={data.map((session) => {
+              return { value: session._id, label: session.name };
+            })}
+            onChange={(e) => navigate(`/in-session/${e.value}`)}
             placeholder="Select a session"
             className="dropdown"
             menuClassName="dropdown-menu"
