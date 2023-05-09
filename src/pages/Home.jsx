@@ -1,28 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { FaPlay } from "react-icons/fa";
-import Dropdown from "react-dropdown";
 import axios from "axios";
 import "./Home.scss";
-
-function useSessions() {
-  return useQuery({
-    queryKey: ["sessions"],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `http://localhost:3000/journal-sessions/${
-          JSON.parse(localStorage.getItem("authData"))._id
-        }`
-      );
-      return data;
-    },
-  });
-}
+import StartSession from "../components/StartSession/StartSession";
 
 function Home() {
-  const navigate = useNavigate();
-  const { status, data } = useSessions();
   const [savedLogs, setSavedLogs] = useState([]);
 
   //* Fetch logs from DB
@@ -41,26 +22,7 @@ function Home() {
   return (
     <div className="container">
       {/*//?Start a session*/}
-      <div className="box start-session-container">
-        <h1>Start a new session</h1>
-        <div className="start-session">
-          <FaPlay className="play-icon" />
-        </div>
-        {status === "loading" ? (
-          "Loading..."
-        ) : (
-          <Dropdown
-            options={data.map((session) => {
-              return { value: session._id, label: session.name };
-            })}
-            onChange={(e) => navigate(`/in-session/${e.value}`)}
-            placeholder="Select a session"
-            className="dropdown"
-            menuClassName="dropdown-menu"
-            placeholderClassName="dropdown-placeholder"
-          />
-        )}
-      </div>
+      <StartSession />
       {/*//?Recent logs*/}
       <div className="box recent-logs-container">
         <h1>Recent logs</h1>

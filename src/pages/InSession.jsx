@@ -43,7 +43,7 @@ const InSession = () => {
   const quesTionPhases = ["think", "answer", "next", "end"];
   const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
   //? Timer
-  const [counter, setCounter] = useState(currentQuestion?.timeToThink || 10);
+  const [counter, setCounter] = useState(currentQuestion?.timeToThink || 15);
   //? Handle speech input
   const [isListening, setIsListening] = useState(false);
 
