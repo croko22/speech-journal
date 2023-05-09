@@ -11,7 +11,7 @@
     grid-gap: 10px;
     list-style: none;
     overflow-y: scroll;
-    height: 700px;
+    // height: 700px;
     @media screen and (max-width: 768px) {
       grid-template-columns: 1fr;
     }
