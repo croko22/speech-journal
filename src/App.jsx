@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Page404 from "./pages/Page404/Page404";
 import Auth from "./pages/Auth/Auth";
+import StartSessionPage from "./pages/StartSessionPage/StartSessionPage";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            {/* //TODO: Reduce the number of pages launch*/}
+            <Route path="/in-session" element={<StartSessionPage />} />
             <Route
               path="/in-session/:sessionId"
               element={
@@ -52,6 +55,7 @@ function App() {
               }
             />
             <Route path="/auth" element={<Auth />} />
+            {/* //TODO: Add a page for user settings*/}
             <Route path="*" element={<Page404 />} />
           </Routes>
           <Footer />
