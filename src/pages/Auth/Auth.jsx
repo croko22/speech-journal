@@ -11,7 +11,10 @@ const Auth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authData) navigate("/home");
+    if (authData) {
+      navigate("/home");
+      navigate(0);
+    }
   }, [authData, navigate]);
 
   return (
@@ -42,15 +45,6 @@ const Auth = () => {
                     type="text"
                     id="input-email"
                     placeholder="john@example.com"
-                    required
-                  />
-                </div>
-                <div class="login-form-2">
-                  <label for="input-name">Full Name</label>
-                  <input
-                    type="text"
-                    id="input-name"
-                    placeholder="John Doe"
                     required
                   />
                 </div>

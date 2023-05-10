@@ -57,6 +57,9 @@ main
   .section-login-1-title {
   font-size: 32px;
   color: #fff;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+  }
 }
 main
   section.section-login
@@ -65,7 +68,6 @@ main
   .section-login-1-main
   .section-login-1-text {
   color: #ffffff94;
-
   font-size: 18px;
 }
 main
@@ -161,7 +163,6 @@ main
   .section-login-2
   .section-login-2-main
   .section-login-2-form
-  .login-form-2
   label,
 main
   section.section-login
