@@ -19,15 +19,15 @@ const Auth = () => {
 
   return (
     <main>
-      <section class="section-login">
-        <div class="section-main">
-          <div class="section-login-1">
-            <div class="section-login-1-main">
-              <h1 class="section-login-1-title">🎤 Speech journal</h1>
-              <p class="section-login-1-text">
+      <section className="section-login">
+        <div className="section-main">
+          <div className="section-login-1">
+            <div className="section-login-1-main">
+              <h1 className="section-login-1-title">🎤 Speech journal</h1>
+              <p className="section-login-1-text">
                 Journaling by recording your speech
               </p>
-              <div class="section-login-1-img">
+              <div className="section-login-1-img">
                 <img
                   src="https://rvs-gradie-signup-page.vercel.app/Assets/iPhone-Mockup.png"
                   alt=""
@@ -35,11 +35,11 @@ const Auth = () => {
               </div>
             </div>
           </div>
-          <div class="section-login-2">
-            <div class="section-login-2-main">
-              <h1 class="section-login-2-title">Login</h1>
-              <form class="section-login-2-form">
-                <div class="login-form-1">
+          <div className="section-login-2">
+            <div className="section-login-2-main">
+              <h1 className="section-login-2-title">Login</h1>
+              <form className="section-login-2-form">
+                <div className="login-form-1">
                   <label for="input-email">Email</label>
                   <input
                     type="text"
@@ -48,7 +48,7 @@ const Auth = () => {
                     required
                   />
                 </div>
-                <div class="login-form-3">
+                <div className="login-form-3">
                   <label for="input-password">Password</label>
                   <input
                     type="password"
@@ -74,17 +74,17 @@ const Auth = () => {
                     console.log("Login Failed");
                   }}
                 />
-                <div class="login-form-4">
+                <div className="login-form-4">
                   <input type="checkbox" id="input-checkbox" />
                   <p>
                     By creating an account, you agree to the{" "}
                     <a href="#">Terms & Conditions.</a>
                   </p>
                 </div>
-                <div class="login-form-submit-btn">
+                <div className="login-form-submit-btn">
                   <button>Create an Account</button>
                 </div>
-                <div class="login-form-5">
+                <div className="login-form-5">
                   <p>
                     {/* Already have an account? <a href="#">Sign In</a> */}
                   </p>

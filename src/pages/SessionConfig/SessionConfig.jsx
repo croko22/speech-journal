@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import SessionsList from "../components/SessionsList/SessionsList";
-import ActiveSession from "../components/ActiveSession/ActiveSession";
+import SessionsList from "../../components/SessionsList/SessionsList";
+import ActiveSession from "../../components/ActiveSession/ActiveSession";
 import axios from "axios";
 import "./SessionConfig.scss";
 

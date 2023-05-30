@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import RecordNote from "../components/RecordNote";
+import RecordNote from "../../components/RecordNote";
 import "./InSession.scss";
 
 const getSessionById = async (id) => {

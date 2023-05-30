@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import InSession from "./pages/InSession";
-import SavedLogs from "./pages/SavedLogs";
-import SessionConfig from "./pages/SessionConfig";
-import Landing from "./pages/Landing";
+import Home from "./pages/Home/Home";
+import InSession from "./pages/InSession/InSession";
+import SavedLogs from "./pages/SavedLogs/SavedLogs";
+import SessionConfig from "./pages/SessionConfig/SessionConfig";
+import Landing from "./pages/Landing/Landing";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import Page404 from "./pages/Page404/Page404";

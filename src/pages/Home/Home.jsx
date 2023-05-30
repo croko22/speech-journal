@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./Home.scss";
-import StartSession from "../components/StartSession/StartSession";
+import StartSession from "../../components/StartSession/StartSession";
 
 function Home() {
   const [savedLogs, setSavedLogs] = useState([]);
