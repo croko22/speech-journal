@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import RecordNote from "../../components/RecordNote";
 import "./InSession.scss";
@@ -26,7 +26,7 @@ const InSession = () => {
   const [allNotes, setAllNotes] = useState([]);
   //* Query session id
   const { sessionId } = useParams();
-  const { status, data, error, isFetching } = useQuery({
+  const { status } = useQuery({
     queryKey: ["session", sessionId],
     queryFn: () => getSessionById(sessionId),
     onSuccess: (data) => {
@@ -58,7 +58,6 @@ const InSession = () => {
   //? Timer
   useEffect(() => {
     if (counter > 0) {
-      // if (!currentQuestion) navigate("/session");
       setTimeout(() => setCounter(counter - 1), 1000);
     } else {
       if (status === "success") {
@@ -79,7 +78,6 @@ const InSession = () => {
           case "next":
             setIndex(index + 1);
             setCounter(storedSessions[index].timeToThink);
-            //? Set current question
             setCurrentQuestion(storedSessions[index]);
             setNote({
               question: storedSessions[index].question,
@@ -101,8 +99,6 @@ const InSession = () => {
 
   return (
     <div className="session-container">
-      {/* <div>{data.name}</div> */}
-      <span>Session: {sessionId}</span>
       <h1 className="session-title">
         {questionsPhase[0].toUpperCase() + questionsPhase.slice(1)}
       </h1>
