@@ -66,7 +66,7 @@ const Header = () => {
           </>
         ) : (
           <a className="login" href="/auth">
-            Login
+            Sign in
           </a>
         )}
       </nav>

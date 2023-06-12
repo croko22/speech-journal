@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home/Home";
 import InSession from "./pages/InSession/InSession";
@@ -44,7 +43,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* //TODO: Reduce the number of pages launch*/}
+            {/* //TODO: Reduce the number of pages of the app*/}
             <Route path="/in-session" element={<StartSessionPage />} />
             <Route
               path="/in-session/:sessionId"
@@ -58,7 +57,6 @@ function App() {
             {/* //TODO: Add a page for user settings*/}
             <Route path="*" element={<Page404 />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </GoogleOAuthProvider>
     </>
