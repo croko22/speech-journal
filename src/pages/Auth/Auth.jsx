@@ -40,7 +40,7 @@ const Auth = () => {
               <h1 className="section-login-2-title">Login</h1>
               <form className="section-login-2-form">
                 <div className="login-form-1">
-                  <label for="input-email">Email</label>
+                  <label htmlFor="input-email">Email</label>
                   <input
                     type="text"
                     id="input-email"
@@ -49,7 +49,7 @@ const Auth = () => {
                   />
                 </div>
                 <div className="login-form-3">
-                  <label for="input-password">Password</label>
+                  <label htmlFor="input-password">Password</label>
                   <input
                     type="password"
                     id="input-password"
@@ -60,7 +60,7 @@ const Auth = () => {
                 <GoogleLogin
                   onSuccess={async (credentialResponse) => {
                     const response = await axios.post(
-                      "${import.meta.env.VITE_API_URL}/login",
+                      `${import.meta.env.VITE_API_URL}/login `,
                       {
                         token: credentialResponse.credential,
                       }
