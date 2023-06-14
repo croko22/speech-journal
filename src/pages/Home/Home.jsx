@@ -10,7 +10,7 @@ function Home() {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await axios.get(
-        `http://localhost:3000/journal-entries/${
+        `${import.meta.env.VITE_API_URL}/journal-entries/${
           JSON.parse(localStorage.getItem("authData"))._id
         }`
       );

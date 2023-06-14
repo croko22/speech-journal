@@ -21,7 +21,7 @@ const SessionCard = ({
 
   const createSessionMutation = useMutation({
     mutationFn: async () => {
-      await axios.post(`http://localhost:3000/journal-sessions`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/journal-sessions`, {
         user: JSON.parse(localStorage.getItem("authData"))._id,
         name: sessionName,
         questions: [],
@@ -41,7 +41,7 @@ const SessionCard = ({
 
   const deleteSessionMutation = useMutation({
     mutationFn: () =>
-      axios.delete(`http://localhost:3000/journal-sessions/${session._id}`),
+      axios.delete(`${import.meta.env.VITE_API_URL}/journal-sessions/${session._id}`),
     onMutate: () => {
       const updatedSessions = savedSessions.filter(
         (s) => s._id !== session._id

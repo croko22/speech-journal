@@ -7,7 +7,7 @@ import "./InSession.scss";
 
 const getSessionById = async (id) => {
   const { data } = await axios.get(
-    `http://localhost:3000/journal-sessions/session/${id}`
+    `${import.meta.env.VITE_API_URL}/journal-sessions/session/${id}`
   );
   return data;
 };
@@ -49,7 +49,7 @@ const InSession = () => {
 
   //? Send to backend
   const saveNote = async () => {
-    await axios.post("http://localhost:3000/journal-entries", {
+    await axios.post(`${import.meta.env.VITE_API_URL}/journal-entries`, {
       qas: allNotes,
       user: JSON.parse(localStorage.getItem("authData"))._id,
     });

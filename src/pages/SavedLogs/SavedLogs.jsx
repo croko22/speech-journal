@@ -12,7 +12,7 @@ const SavedLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await axios.get(
-        `http://localhost:3000/journal-entries/${
+        `${import.meta.env.VITE_API_URL}/journal-entries/${
           JSON.parse(localStorage.getItem("authData"))._id
         }`
       );
@@ -23,7 +23,7 @@ const SavedLogs = () => {
 
   const deleteLogMutation = useMutation({
     mutationFn: (id) =>
-      axios.delete(`http://localhost:3000/journal-entries/${id}`),
+      axios.delete(`${import.meta.env.VITE_API_URL}/journal-entries/${id}`),
     onMutate: (id) => {
       const newLogs = savedLogs.filter((log) => log._id !== id);
       setSavedLogs(newLogs);

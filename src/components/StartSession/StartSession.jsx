@@ -9,7 +9,7 @@ function useSessions() {
     queryKey: ["sessions"],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:3000/journal-sessions/${
+        `${import.meta.env.VITE_API_URL}/journal-sessions/${
           JSON.parse(localStorage.getItem("authData"))._id
         }`
       );

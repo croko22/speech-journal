@@ -23,7 +23,7 @@ const SessionCard = ({
 
   const patchSession = async (sessionData) => {
     axios.patch(
-      `http://localhost:3000/journal-sessions/${activeSession._id}`,
+      `${import.meta.env.VITE_API_URL}/journal-sessions/${activeSession._id}`,
       sessionData
     );
   };
