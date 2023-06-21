@@ -1,16 +1,19 @@
-import { NavLink } from "react-router-dom";
 import { FaCog, FaFileAlt, FaPlay, FaUser } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
+import { useStore } from "../hooks/useStore";
 import Dropdown from "react-dropdown";
 import "./Header.scss";
 
 const Header = () => {
+  const { authData, setAuthData } = useStore();
   return (
     <header>
       <a className="header-title" href="/">
         🎤 Speech Journal
       </a>
       <nav>
-        {window.localStorage.getItem("authData") ? (
+        {authData ? (
           <>
             <NavLink
               className={`header-link ${({ isActive }) =>
@@ -47,7 +50,9 @@ const Header = () => {
                 onChange={(e) => {
                   switch (e.value) {
                     case "1":
+                      googleLogout();
                       window.localStorage.removeItem("authData");
+                      setAuthData(null);
                       window.location.reload();
                       break;
                     case "2":
