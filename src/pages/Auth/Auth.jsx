@@ -57,10 +57,11 @@ const Auth = () => {
                     required
                   />
                 </div>
+                <p>or</p>
                 <GoogleLogin
                   onSuccess={async (credentialResponse) => {
                     const response = await axios.post(
-                      `${import.meta.env.VITE_API_URL}/login `,
+                      `${import.meta.env.VITE_API_URL}/auth/google`,
                       {
                         token: credentialResponse.credential,
                       }
