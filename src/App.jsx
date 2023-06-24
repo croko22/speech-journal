@@ -10,6 +10,7 @@ import Landing from "./pages/Landing/Landing";
 import Page404 from "./pages/Page404/Page404";
 import Auth from "./pages/Auth/Auth";
 import StartSessionPage from "./pages/StartSessionPage/StartSessionPage";
+import UserSettings from "./pages/UserSettings/UserSettings";
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
               }
             />
             <Route path="/auth" element={<Auth />} />
-            {/* //TODO: Add a page for user settings*/}
+            <Route path="/settings" element={<UserSettings />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         </BrowserRouter>
