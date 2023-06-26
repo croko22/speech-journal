@@ -54,8 +54,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <UserSettings />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/settings" element={<UserSettings />} />
             <Route path="*" element={<Page404 />} />
           </Routes>
         </BrowserRouter>
