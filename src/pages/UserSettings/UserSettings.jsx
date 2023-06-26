@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./UserSettings.scss";
 
 const UserSettings = () => {
@@ -7,7 +8,9 @@ const UserSettings = () => {
 
   const handleDeleteClick = () => {
     setShowDeleteButton(false);
-    console.log("Deleting account...", user._id);
+    axios.delete(`${import.meta.env.VITE_API_URL}/users/${user._id}`);
+    window.localStorage.removeItem("authData");
+    window.location.reload();
   };
 
   return (
