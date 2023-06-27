@@ -45,7 +45,14 @@ function App() {
               }
             />
             {/* //TODO: Reduce the number of pages of the app*/}
-            <Route path="/in-session" element={<StartSessionPage />} />
+            <Route
+              path="/in-session"
+              element={
+                <ProtectedRoute>
+                  <StartSessionPage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/in-session/:sessionId"
               element={
