@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
-import "./Landing.scss";
 import Footer from "../../components/Footer/Footer";
+import "./Landing.scss";
 
 const Landing = () => {
   const authData = useStore((state) => state.authData);
@@ -13,28 +13,6 @@ const Landing = () => {
   }, [authData, navigate]);
 
   return (
-    // <div className="landing-container">
-    //   <div className="hero">
-    //     <div className="">
-    //       <h1> Speech journal 🎤</h1>
-    //       <p className="hero-text">
-    //         Speech journal is a tool to help you improve your speech and
-    //         communication skills while journaling.
-    //       </p>
-    //       <p>
-    //         It allows you to record your speech and then analyze it to find out
-    //         what you can improve.
-    //       </p>
-    //       <small>
-    //         It also allows you to save your sessions and review them later.
-    //       </small>
-    //       <br />
-    //       <a className="login" >
-    //         Join now
-    //       </a>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="landing-page">
       <section className="hero">
         <div className="container">
@@ -96,7 +74,9 @@ const Landing = () => {
                 <li>Limited notes (Once per day)</li>
                 <li>Single user</li>
               </ul>
-              <button className="btn">Get Started</button>
+              <a href="/auth" className="btn">
+                Get Started
+              </a>
             </div>
             <div className="pricing-card">
               <h3 className="pricing-card-title">Premium Plan</h3>
@@ -118,7 +98,9 @@ const Landing = () => {
           <p className="cta-description">
             Experience the power of voice-activated journaling today.
           </p>
-          <button className="btn">Sign Up Now</button>
+          <a href="/auth" className="btn">
+            Sign Up Now
+          </a>
         </div>
       </section>
       <Footer />
