@@ -85,8 +85,9 @@ main
   .section-login-1-main
   .section-login-1-img
   img {
-  width: 100%;
+  width: 50%;
   display: block;
+  margin: 0 auto;
   @media screen and (max-width: 768px) {
     display: none;
   }
