@@ -56,10 +56,7 @@ const Auth = () => {
                 Journaling by recording your speech
               </p>
               <div className="section-login-1-img">
-                <img
-                  src="https://rvs-gradie-signup-page.vercel.app/Assets/iPhone-Mockup.png"
-                  alt=""
-                />
+                <img src="sj-mock.png" alt="Speech journal mockup" />
               </div>
             </div>
           </div>
