@@ -32,16 +32,18 @@ const SessionCard = ({
         ...session,
         name: sessionName,
       };
-      setSavedSessions([...savedSessions, tmpSession]);
       setAddSessionMode(false);
-      setActiveSession(savedSessions[savedSessions.length - 1]);
+      setSavedSessions([...savedSessions, tmpSession]);
+      // setActiveSession(savedSessions[savedSessions.length - 1]);
     },
     onSettled: () => queryClient.invalidateQueries("savedSessions"),
   });
 
   const deleteSessionMutation = useMutation({
     mutationFn: () =>
-      axios.delete(`${import.meta.env.VITE_API_URL}/journal-sessions/${session._id}`),
+      axios.delete(
+        `${import.meta.env.VITE_API_URL}/journal-sessions/${session._id}`
+      ),
     onMutate: () => {
       const updatedSessions = savedSessions.filter(
         (s) => s._id !== session._id
