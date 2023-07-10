@@ -34,12 +34,11 @@ const Header = () => {
             <NavLink
               className={`header-link ${({ isActive }) =>
                 isActive ? "active-header-link" : ""}`}
-              to="/in-session"
+              to="/home"
             >
               <FaPlay className="icon" />
               <span>Start session</span>
             </NavLink>
-            {/* //TODO: User dropdown, logout and settings */}
             <div className="header-link">
               <FaUser className="icon" />
               <Dropdown
