@@ -52,14 +52,14 @@ body {
     display: flex;
     align-items: center;
     padding: 20px;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
     background-color: #eee;
 
     .play-icon {
-      width: 200px;
-      height: 200px;
+      width: 150px;
+      height: 150px;
       margin: 0 auto;
       color: #000;
 
@@ -97,28 +97,25 @@ body {
   }
 }
 
-.recent-logs-container {
-  height: 150px;
+.logs {
+  display: grid;
+  gap: 20px;
   overflow: auto;
+  grid-template-columns: repeat(5, 1fr);
   padding: 20px;
 
   @media screen and (max-width: 768px) {
     display: none;
   }
-
   .log {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
-    background-color: #eee;
-
-    .qa-item {
-      border-left: 1px solid #000;
-      text-align: center;
-      padding-left: 10px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    &:hover {
+      cursor: pointer;
+      color: #aaa;
     }
   }
 }

@@ -29,13 +29,7 @@ function Home() {
         <div className="logs">
           {savedLogs.reverse().map((log, index) => (
             <div className="log" key={index}>
-              <small className="date">{log.dateAdded.slice(0, 10)}</small>
-              {log.qas.map((qa, index) => (
-                <div className="qa-item" key={index}>
-                  <h5>{qa.question}</h5>
-                  <p>{qa.answer}</p>
-                </div>
-              ))}
+              {log.dateAdded.slice(0, 10)}
             </div>
           ))}
         </div>
