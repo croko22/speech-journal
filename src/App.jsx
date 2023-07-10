@@ -9,10 +9,10 @@ import SessionConfig from "./pages/SessionConfig/SessionConfig";
 import Landing from "./pages/Landing/Landing";
 import Page404 from "./pages/Page404/Page404";
 import Auth from "./pages/Auth/Auth";
-import StartSessionPage from "./pages/StartSessionPage/StartSessionPage";
 import UserSettings from "./pages/UserSettings/UserSettings";
 
 function App() {
+  //TODO: Simplify this route structure
   return (
     <>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
@@ -41,15 +41,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <SavedLogs />
-                </ProtectedRoute>
-              }
-            />
-            {/* //TODO: Reduce the number of pages of the app*/}
-            <Route
-              path="/in-session"
-              element={
-                <ProtectedRoute>
-                  <StartSessionPage />
                 </ProtectedRoute>
               }
             />
