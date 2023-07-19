@@ -1,61 +1,28 @@
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  padding: 0 50px;
+  padding: 10px 50px;
   background-color: #eee;
-  @media screen and (max-width: 767px) {
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-    background-color: #eee;
-    width: 100%;
-    padding: 0 1rem;
-    border-radius: 1.25rem 1.25rem 0 0;
-    transition: 0.4s;
-    .header-title {
-      position: fixed;
-      top: 0rem;
-      left: 0rem;
-      padding: 1rem;
-      background: #eee;
-      border-radius: 0 0 1.25rem 1.25rem;
-      width: 100%;
-    }
-    span {
-      display: none;
-    }
-    nav {
-      display: flex;
-      flex: 1;
-      align-items: center;
-      justify-content: space-around;
-      flex-direction: row;
-      list-style: none;
-    }
-  }
 
-  .header-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #000;
-  }
   nav {
     display: flex;
     align-items: center;
-    list-style: none;
+    .header-title {
+      flex: 1;
+      font-size: 24px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #000;
+    }
     .header-link,
     button {
       display: flex;
       align-items: center;
       flex-direction: row;
       text-decoration: none;
-      color: #000;
       font-size: 1rem;
-      border-left: 1px solid #000;
       padding: 5px 20px;
+      color: #000;
+      border-left: 1px solid #000;
+
       .icon {
         margin-right: 0.5rem;
         font-size: large;
@@ -64,21 +31,26 @@ header {
           font-size: 1.5em;
         }
       }
+
       &:hover {
         color: #555;
       }
+
       @media screen and (max-width: 767px) {
         border-bottom: none;
         border-left: none;
       }
     }
+
     .header-link.active {
       border-bottom: 2px solid #000;
+
       @media screen and (max-width: 767px) {
         border-bottom: none;
         color: #555;
       }
     }
+
     .login {
       background-color: #fff;
       border: 1px solid #000;
@@ -88,22 +60,26 @@ header {
       font-weight: bold;
       text-decoration: none;
       color: #000;
+
       &:hover {
         background-color: #000;
         color: #fff;
       }
     }
   }
+
   .dropdown {
     @media screen and (max-width: 767px) {
       display: flex;
       flex-direction: column-reverse;
     }
+
     .dropdown-menu {
       position: absolute;
       background-color: #eee;
       width: 100%;
       padding: 5px 10px;
+
       div {
         &:hover {
           cursor: pointer;
@@ -111,12 +87,40 @@ header {
         }
       }
     }
+
     .dropdown-placeholder {
       padding: 5px 10px;
+
       &:hover {
         cursor: pointer;
         color: #aaa;
       }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 0.5rem 0;
+    border-radius: 1.25rem 1.25rem 0 0;
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .header-title {
+      position: fixed;
+      top: 0rem;
+      padding: 1rem;
+      background: #eee;
+      border-radius: 0 0 1.25rem 1.25rem;
+      width: 100%;
+    }
+
+    span {
+      display: none;
     }
   }
 }

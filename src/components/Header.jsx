@@ -9,10 +9,10 @@ const Header = () => {
   const { authData, setAuthData } = useStore();
   return (
     <header>
-      <a className="header-title" href="/">
-        🎤 Speech Journal
-      </a>
       <nav>
+        <a className="header-title" href="/">
+          🎤 Speech Journal
+        </a>
         {authData ? (
           <>
             <NavLink
