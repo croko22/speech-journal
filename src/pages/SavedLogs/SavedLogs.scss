@@ -1,35 +1,35 @@
 .logs-containter {
-  padding: 20px;
+  padding: 25px;
   h1 {
     font-size: 24px;
-    color: #444;
     margin-bottom: 20px;
+    @media screen and (max-width: 768px) {
+      margin-top: 45px;
+    }
   }
   .logs-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     list-style: none;
     overflow-y: scroll;
-    // height: 700px;
     @media screen and (max-width: 768px) {
       grid-template-columns: 1fr;
     }
     .log-card {
       background: #fff;
       border: 1px solid #eee;
-      border-radius: 4px;
+      border-radius: 10px;
       padding: 20px;
       p {
         font-size: 16px;
         color: #666;
         margin: 10px 0;
       }
-      a {
-        color: #8e4dff;
-        font-size: 14px;
-        font-weight: bold;
-        text-decoration: none;
+      .date {
+        position: relative;
+        top: 0px;
+        right: 0px;
       }
     }
   }
