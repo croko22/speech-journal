@@ -5,9 +5,8 @@
   flex-direction: column;
   gap: 20px;
   @media screen and (max-width: 768px) {
-    width: 300px;
+    width: 400px;
     padding: 60px 30px;
-    margin: 0;
   }
 }
 
@@ -27,19 +26,40 @@
 .delete-button {
   background-color: #111;
   color: white;
+  font-size: large;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    background-color: #fff;
+    color: #111;
+  }
 }
 
 .delete-confirm {
-  margin-top: 20px;
-}
-
-.delete-confirm-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    &-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #fff;
+      color: #000;
+      border: 3px solid #000;
+      padding: 10px 25px;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
 }
