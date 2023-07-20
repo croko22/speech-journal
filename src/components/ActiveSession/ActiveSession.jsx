@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
-import QuestionCard from "../QuestionCard";
+import QuestionCard from "../QuestionCard/QuestionCard";
 
 const ActiveSession = ({
   activeSession,

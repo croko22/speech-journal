@@ -1,7 +1,7 @@
 import { FaCog, FaFileAlt, FaPlay, FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import { useStore } from "../hooks/useStore";
+import { useStore } from "../../hooks/useStore";
 import Dropdown from "react-dropdown";
 import "./Header.scss";
 
