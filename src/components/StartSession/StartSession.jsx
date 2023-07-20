@@ -32,7 +32,7 @@ const StartSession = () => {
         "Loading..."
       ) : (
         <Dropdown
-          options={data.map((session) => {
+          options={data?.map((session) => {
             return { value: session._id, label: session.name };
           })}
           onChange={(e) => navigate(`/in-session/${e.value}`)}
