@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
 import InSession from "./pages/InSession/InSession";
 import SavedLogs from "./pages/SavedLogs/SavedLogs";
