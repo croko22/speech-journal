@@ -14,6 +14,9 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
+      {/* //TODO: Add a header*/}
+      {/* <a href="#pricing">Pricing</a> */}
+
       <section className="hero">
         <div className="container">
           <h1 className="title">Speech Journal 🎤</h1>
@@ -62,7 +65,7 @@ const Landing = () => {
         </div>
       </section>
 
-      <section className="pricing">
+      <section className="pricing" id="pricing">
         <div className="container">
           <h2 className="pricing-title">Choose Your Plan</h2>
           <div className="pricing-cards">
