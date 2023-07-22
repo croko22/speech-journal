@@ -21,7 +21,7 @@ header {
       font-size: 1rem;
       padding: 5px 20px;
       color: #000;
-      border-left: 1px solid #000;
+      border-left: 1px dashed #aaa;
 
       .icon {
         margin-right: 0.5rem;
@@ -43,11 +43,14 @@ header {
     }
 
     .header-link.active {
-      border-bottom: 2px solid #000;
+      span {
+        color: #111;
+        font-weight: bold;
+      }
 
       @media screen and (max-width: 767px) {
         border-bottom: none;
-        color: #555;
+        color: #aaa;
       }
     }
 
