@@ -17,3 +17,8 @@ ignorePeriod = 0
 
 # Enabled providers to submit sitemap to (optional, default = 'google', 'yandex'). Possible providers are currently only 'google', 'yandex'.
 providers = ["google", "yandex"]
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
