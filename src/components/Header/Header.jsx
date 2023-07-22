@@ -18,10 +18,10 @@ const Header = () => {
             <NavLink
               className={`header-link ${({ isActive }) =>
                 isActive ? "active-header-link" : ""}`}
-              to="/session"
+              to="/home"
             >
-              <FaCog className="icon" />
-              <span>Journal Session</span>
+              <FaPlay className="icon" />
+              <span>Start session</span>
             </NavLink>
             <NavLink
               className={`header-link ${({ isActive }) =>
@@ -34,10 +34,10 @@ const Header = () => {
             <NavLink
               className={`header-link ${({ isActive }) =>
                 isActive ? "active-header-link" : ""}`}
-              to="/home"
+              to="/session/config"
             >
-              <FaPlay className="icon" />
-              <span>Start session</span>
+              <FaCog className="icon" />
+              <span>Journal Session</span>
             </NavLink>
             <div className="header-link">
               <FaUser className="icon" />

@@ -28,27 +28,29 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/session"
-              element={
-                <ProtectedRoute>
-                  <SessionConfig />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/session">
+              <Route
+                path="config"
+                element={
+                  <ProtectedRoute>
+                    <SessionConfig />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path=":sessionId"
+                element={
+                  <ProtectedRoute>
+                    <InSession />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
             <Route
               path="/saved-logs"
               element={
                 <ProtectedRoute>
                   <SavedLogs />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/in-session/:sessionId"
-              element={
-                <ProtectedRoute>
-                  <InSession />
                 </ProtectedRoute>
               }
             />

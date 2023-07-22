@@ -35,7 +35,7 @@ const StartSession = () => {
           options={data?.map((session) => {
             return { value: session._id, label: session.name };
           })}
-          onChange={(e) => navigate(`/in-session/${e.value}`)}
+          onChange={(e) => navigate(`/session/${e.value}`)}
           placeholder="Select a session"
           className="dropdown"
           menuClassName="dropdown-menu"
