@@ -36,7 +36,7 @@
   }
   textarea {
     width: 80%;
-    height: 450px;
+    height: 400px;
     font: 1em "Roboto", sans-serif;
     padding: 10px;
     border-radius: 5px;
@@ -44,6 +44,9 @@
     resize: none;
     &:focus {
       outline: none;
+    }
+    &:disabled {
+      background-color: #fff;
     }
   }
 }
