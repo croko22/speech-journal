@@ -10,7 +10,12 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
   margin: 10px;
-  .buttons-box {
+  &__browser-not-supported {
+    margin-bottom: 10px;
+    font-size: large;
+    color: gray;
+  }
+  &__buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,14 +36,14 @@
   }
   textarea {
     width: 80%;
-    height: 250px;
-    border-radius: 5px;
-    border: none;
+    height: 450px;
     font: 1em "Roboto", sans-serif;
     padding: 10px;
+    border-radius: 5px;
+    border: none;
+    resize: none;
     &:focus {
       outline: none;
     }
-    resize: none;
   }
 }

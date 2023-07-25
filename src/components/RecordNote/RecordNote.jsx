@@ -15,7 +15,9 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
   if (!SpeechRecognition) {
     return (
       <div className="recording-box">
-        <p>Browser does not support Speech Recognition</p>
+        <p className="recording-box__browser-not-supported">
+          Browser does not support Speech Recognition :(
+        </p>
         <textarea
           name="answer"
           placeholder="Toma notas y luego edita"
@@ -62,7 +64,7 @@ const RecordNote = ({ note, setNote, isListening, setIsListening }) => {
 
   return (
     <div className="recording-box">
-      <div className="buttons-box">
+      <div className="recording-box__buttons">
         {isListening ? <FaMicrophone /> : <FaStop />}
         <button onClick={() => setIsListening((prevState) => !prevState)}>
           {isListening ? "Stop" : "Start"}
