@@ -15,6 +15,15 @@
     overflow-y: scroll;
     height: 500px;
     width: 600px;
+    @media screen and (max-width: 767px) {
+      overflow-x: scroll;
+      flex-direction: row;
+      max-width: 100%;
+      max-height: 100px;
+      .session-card {
+        height: 100px;
+      }
+    }
     .session-card {
       padding: 20px;
       width: 100%;

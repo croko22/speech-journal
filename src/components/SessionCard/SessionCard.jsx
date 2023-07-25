@@ -27,14 +27,15 @@ const SessionCard = ({
         questions: [],
       });
     },
-    onMutate: () => {
+    onMutate: async () => {
+      await queryClient.cancelQueries("savedSessions");
       const tmpSession = {
         ...session,
         name: sessionName,
       };
-      setAddSessionMode(false);
       setSavedSessions([...savedSessions, tmpSession]);
-      // setActiveSession(savedSessions[savedSessions.length - 1]);
+      setAddSessionMode(false);
+      setActiveSession(tmpSession);
     },
     onSettled: () => queryClient.invalidateQueries("savedSessions"),
   });
@@ -44,7 +45,8 @@ const SessionCard = ({
       axios.delete(
         `${import.meta.env.VITE_API_URL}/journal-sessions/${session._id}`
       ),
-    onMutate: () => {
+    onMutate: async () => {
+      await queryClient.cancelQueries("savedSessions");
       const updatedSessions = savedSessions.filter(
         (s) => s._id !== session._id
       );

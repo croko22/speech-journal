@@ -21,7 +21,7 @@ const ActiveSession = ({
   return (
     <div className="questions-container box">
       <div className="qc-header">
-        <h1>{activeSession.name}</h1>
+        <h1>{activeSession?.name}</h1>
       </div>
       {/* //*Rendered QuestionCards*/}
       {activeSession?.questions?.map((question) => (
