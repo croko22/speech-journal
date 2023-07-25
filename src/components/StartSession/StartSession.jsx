@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaAngleUp, FaAngleDown } from "react-icons/fa";
 import Dropdown from "react-dropdown";
 import axios from "axios";
 
@@ -36,10 +36,19 @@ const StartSession = () => {
             return { value: session._id, label: session.name };
           })}
           onChange={(e) => navigate(`/session/${e.value}`)}
-          placeholder="Select a session"
           className="dropdown"
           menuClassName="dropdown-menu"
           placeholderClassName="dropdown-placeholder"
+          arrowClosed={
+            <p className="dropdown-text">
+              Select a Session <FaAngleDown />
+            </p>
+          }
+          arrowOpen={
+            <p className="dropdown-text">
+              Select a Session <FaAngleUp />
+            </p>
+          }
         />
       )}
     </div>
