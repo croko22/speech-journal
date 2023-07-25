@@ -39,14 +39,17 @@ const SavedLogs = () => {
       <ul className="logs-grid">
         {savedLogs.map((log, index) => (
           <li className="log-card" key={index}>
-            <p className="date">
+            <p className="log-card__date">
               <small>{log.dateAdded?.slice(0, 10)}</small>{" "}
-              <FaTrashAlt onClick={() => deleteLogMutation.mutate(log._id)} />
+              <FaTrashAlt
+                className="log-card__date__delete-log-icon"
+                onClick={() => deleteLogMutation.mutate(log._id)}
+              />
             </p>
             {log.qas.map((qa, index) => (
               <div key={index}>
                 <h5>{qa.question}</h5>
-                <p>{qa.answer}</p>
+                <p className="log-card__answer">{qa.answer}</p>
               </div>
             ))}
           </li>

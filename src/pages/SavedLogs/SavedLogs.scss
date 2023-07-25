@@ -1,5 +1,8 @@
 .logs-containter {
   padding: 25px;
+  @media screen and (max-width: 768px) {
+    padding: 40px 15px 80px;
+  }
   h1 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -14,20 +17,30 @@
     list-style: none;
     overflow-y: scroll;
     @media screen and (max-width: 768px) {
-      grid-template-columns: 1fr;
+      grid-template-columns: 100%;
     }
     .log-card {
       background: #fff;
       border: 1px solid #eee;
       border-radius: 10px;
       padding: 20px;
-      p {
-        font-size: 16px;
-        color: #666;
-        margin: 10px 0;
-      }
-      .date {
+      &__date {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         float: right;
+        &__delete-log-icon {
+          cursor: pointer;
+          &:hover {
+            color: #999;
+          }
+        }
+      }
+      &__answer {
+        font-size: 1em;
+        margin: 10px 0;
+        word-wrap: break-word;
+        color: #666;
       }
     }
   }
