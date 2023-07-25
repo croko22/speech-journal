@@ -11,58 +11,23 @@ import Auth from "./pages/Auth/Auth";
 import UserSettings from "./pages/UserSettings/UserSettings";
 
 function App() {
-  //TODO: Simplify this route structure
   return (
     <>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <BrowserRouter>
-          {/* <Header /> */}
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route
-              path="/home"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/session">
-              <Route
-                path="config"
-                element={
-                  <ProtectedRoute>
-                    <SessionConfig />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path=":sessionId"
-                element={
-                  <ProtectedRoute>
-                    <InSession />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
-            <Route
-              path="/saved-logs"
-              element={
-                <ProtectedRoute>
-                  <SavedLogs />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <UserSettings />
-                </ProtectedRoute>
-              }
-            />
             <Route path="/auth" element={<Auth />} />
-            <Route path="*" element={<Page404 />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="home" element={<Home />} />
+              <Route path="/session">
+                <Route path="config" element={<SessionConfig />} />
+                <Route path=":sessionId" element={<InSession />} />
+              </Route>
+              <Route path="/saved-logs" element={<SavedLogs />} />
+              <Route path="/settings" element={<UserSettings />} />
+              <Route path="*" element={<Page404 />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </GoogleOAuthProvider>
