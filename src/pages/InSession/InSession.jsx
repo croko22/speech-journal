@@ -98,23 +98,27 @@ const InSession = () => {
   }, [counter]);
 
   return (
-    <div className="session-container">
-      <h1 className="session-title">
+    <div className="session">
+      <h1 className="session__phase-title">
         {questionsPhase[0].toUpperCase() + questionsPhase.slice(1)}
       </h1>
-      <p className="timer">{counter}</p>
-      {
-        <h1>
-          {questionsPhase !== "next" &&
-            questionsPhase !== "end" &&
-            currentQuestion?.question}
-        </h1>
-      }
-      {questionsPhase === "think"
-        ? "Think and reflect for some time..."
-        : questionsPhase === "next"
-        ? "New question incoming"
-        : "I'm all ears... 👂👂👂"}
+      <p className="session__timer">{counter}</p>
+      <div className="session__question">
+        {
+          <h1 className="session__question__title">
+            {questionsPhase !== "next" &&
+              questionsPhase !== "end" &&
+              currentQuestion?.question}
+          </h1>
+        }
+        <p className="session__question__phase">
+          {questionsPhase === "think"
+            ? "Think and reflect for some time..."
+            : questionsPhase === "next"
+            ? "New question incoming"
+            : "I'm all ears... 👂👂👂"}
+        </p>
+      </div>
       <RecordNote
         note={note}
         setNote={setNote}
