@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
-const ProtectedRoute = (props) => {
+const ProtectedRoute = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const checkUserToken = () => {
@@ -18,7 +18,7 @@ const ProtectedRoute = (props) => {
   return (
     <React.Fragment>
       <Header />
-      {isLoggedIn ? props.children : null}
+      <Outlet />
     </React.Fragment>
   );
 };
