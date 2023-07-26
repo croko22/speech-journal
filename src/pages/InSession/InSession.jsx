@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import RecordNote from "../../components/RecordNote/RecordNote";
 import "./InSession.scss";
 
 const getSessionById = async (id) => {
-  const { data } = await axios.get(
-    `${import.meta.env.VITE_API_URL}/journal-sessions/session/${id}`
-  );
+  const { data } = await axios.get(`/journal-sessions/session/${id}`);
   return data;
 };
 
@@ -49,7 +47,7 @@ const InSession = () => {
 
   //? Send to backend
   const saveNote = async () => {
-    await axios.post(`${import.meta.env.VITE_API_URL}/journal-entries`, {
+    await axios.post(`/journal-entries`, {
       qas: allNotes,
       user: JSON.parse(localStorage.getItem("authData"))._id,
     });

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrashAlt, FaRegEdit, FaTimes, FaRegSave } from "react-icons/fa";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import { v4 } from "uuid";
 
 import "./QuestionCard.scss";
@@ -22,10 +22,7 @@ const SessionCard = ({
   const [question, setQuestion] = useState(sQuestion);
 
   const patchSession = async (sessionData) => {
-    axios.patch(
-      `${import.meta.env.VITE_API_URL}/journal-sessions/${activeSession._id}`,
-      sessionData
-    );
+    axios.patch(`/journal-sessions/${activeSession._id}`, sessionData);
   };
 
   const addQuestionMutation = useMutation({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaCheck, FaTimes, FaSkull } from "react-icons/fa";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import "./UserSettings.scss";
 
 const UserSettings = () => {
@@ -9,7 +9,7 @@ const UserSettings = () => {
 
   const handleDeleteClick = () => {
     setShowDeleteButton(false);
-    axios.delete(`${import.meta.env.VITE_API_URL}/users/${user._id}`);
+    axios.delete(`/users/${user._id}`);
     window.localStorage.removeItem("authData");
     window.location.reload();
   };

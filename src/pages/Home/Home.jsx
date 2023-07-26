@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import "./Home.scss";
 import StartSession from "../../components/StartSession/StartSession";
 
@@ -10,9 +10,7 @@ function Home() {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/journal-entries/${
-          JSON.parse(localStorage.getItem("authData"))._id
-        }`
+        `/journal-entries/${JSON.parse(localStorage.getItem("authData"))._id}`
       );
       setSavedLogs(res.data);
     };

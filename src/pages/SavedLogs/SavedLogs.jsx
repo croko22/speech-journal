@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import "./SavedLogs.scss";
 
 const SavedLogs = () => {
@@ -12,9 +12,7 @@ const SavedLogs = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/journal-entries/${
-          JSON.parse(localStorage.getItem("authData"))._id
-        }`
+        `/journal-entries/${JSON.parse(localStorage.getItem("authData"))._id}`
       );
       setSavedLogs(res.data);
     };
@@ -22,8 +20,7 @@ const SavedLogs = () => {
   }, []);
 
   const deleteLogMutation = useMutation({
-    mutationFn: (id) =>
-      axios.delete(`${import.meta.env.VITE_API_URL}/journal-entries/${id}`),
+    mutationFn: (id) => axios.delete(`journal-entries/${id}`),
     onMutate: (id) => {
       const newLogs = savedLogs.filter((log) => log._id !== id);
       setSavedLogs(newLogs);

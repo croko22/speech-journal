@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrashAlt, FaRegEdit, FaTimes, FaRegSave } from "react-icons/fa";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 import "./SessionCard.scss";
 
 const SessionCard = ({
@@ -21,7 +21,7 @@ const SessionCard = ({
 
   const createSessionMutation = useMutation({
     mutationFn: async () => {
-      await axios.post(`${import.meta.env.VITE_API_URL}/journal-sessions`, {
+      await axios.post(`/journal-sessions`, {
         user: JSON.parse(localStorage.getItem("authData"))._id,
         name: sessionName,
         questions: [],
@@ -41,10 +41,7 @@ const SessionCard = ({
   });
 
   const deleteSessionMutation = useMutation({
-    mutationFn: () =>
-      axios.delete(
-        `${import.meta.env.VITE_API_URL}/journal-sessions/${session._id}`
-      ),
+    mutationFn: () => axios.delete(`/journal-sessions/${session._id}`),
     onMutate: async () => {
       await queryClient.cancelQueries("savedSessions");
       const updatedSessions = savedSessions.filter(

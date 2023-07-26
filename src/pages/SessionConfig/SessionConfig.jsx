@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import { axios } from "../../hooks/axios";
 import SessionsList from "../../components/SessionsList/SessionsList";
 import ActiveSession from "../../components/ActiveSession/ActiveSession";
-import axios from "axios";
 import "./SessionConfig.scss";
 
 const SessionConfig = () => {
@@ -12,9 +12,7 @@ const SessionConfig = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/journal-sessions/${
-          JSON.parse(localStorage.getItem("authData"))._id
-        }`
+        `/journal-sessions/${JSON.parse(localStorage.getItem("authData"))._id}`
       );
       setSavedSessions(res.data);
     };
