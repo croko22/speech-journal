@@ -5,6 +5,7 @@ export const useStore = create((set) => ({
     ? JSON.parse(localStorage.getItem("authData"))
     : null,
   setAuthData: (authData) => {
+    localStorage.setItem("authData", JSON.stringify(authData));
     set({ authData });
   },
 }));

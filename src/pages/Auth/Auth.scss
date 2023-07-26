@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
-
+@import "../../main";
 * {
   margin: 0px;
   padding: 0px;
@@ -265,7 +265,7 @@ main
   .section-login-2-form
   .login-form-submit-btn
   button {
-  background: #5a1fe0;
+  background: $primary-color;
   padding: 14px;
   width: 100%;
   color: #fff;

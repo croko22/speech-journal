@@ -1,29 +1,21 @@
 import { useState } from "react";
 import { useStore } from "../../hooks/useStore";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 
 const Register = ({ email, setEmail, password, setPassword }) => {
+  const [username, setUsername] = useState("");
   const setAuthData = useStore((state) => state.setAuthData);
 
-  const [username, setUsername] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        {
-          username,
-          email,
-          password,
-        }
-      );
-
+      const response = await axios.post(`/auth/register`, {
+        username,
+        email,
+        password,
+      });
       if (response.status === 201) {
-        const data = response.data;
-        console.log(data);
-        localStorage.setItem("authData", JSON.stringify(data));
-        setAuthData(data);
+        setAuthData(response.data);
       } else console.log("Register failed");
     } catch (error) {
       console.log(error);

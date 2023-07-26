@@ -1,28 +1,19 @@
-import React from "react";
 import { useStore } from "../../hooks/useStore";
-import axios from "axios";
+import { axios } from "../../hooks/axios";
 
 const Login = ({ email, setEmail, password, setPassword }) => {
   const setAuthData = useStore((state) => state.setAuthData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const res = await axios.post(`/auth/login`, {
+        email,
+        password,
+      });
 
-      if (response.status === 201) {
-        const data = response.data;
-        console.log(data);
-        localStorage.setItem("authData", JSON.stringify(data.user));
-        setAuthData(data);
-      } else console.log("Login failed");
+      if (res.status === 201) setAuthData(res.data);
+      else console.log("Login failed");
     } catch (error) {
       console.log(error);
     }

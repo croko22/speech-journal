@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
 import { GoogleLogin } from "@react-oauth/google";
+import { axios } from "../../hooks/axios";
 import Login from "../../components/Auth/Login";
 import Register from "../../components/Auth/Register";
 import "./Auth.scss";
@@ -10,6 +11,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authMode, setAuthMode] = useState("login"); // ["login", "register"]
+  const setAuthData = useStore((state) => state.setAuthData);
   const authData = useStore((state) => state.authData);
   const navigate = useNavigate();
 
@@ -68,15 +70,10 @@ const Auth = () => {
               <p>or</p>
               <GoogleLogin
                 onSuccess={async (credentialResponse) => {
-                  const response = await axios.post(
-                    `${import.meta.env.VITE_API_URL}/auth/google`,
-                    {
-                      token: credentialResponse.credential,
-                    }
-                  );
-                  const data = response.data;
-                  localStorage.setItem("authData", JSON.stringify(data));
-                  setAuthData(data);
+                  const response = await axios.post(`/auth/google`, {
+                    token: credentialResponse.credential,
+                  });
+                  setAuthData(response.data);
                 }}
                 onError={() => {
                   console.log("Login Failed");
