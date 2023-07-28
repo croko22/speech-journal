@@ -2,15 +2,15 @@ import { create } from "zustand";
 const storagePrefix = "speech_journal_";
 
 export const useStore = create((set) => ({
-  authData: localStorage.getItem("authData")
-    ? JSON.parse(localStorage.getItem("authData"))
+  authData: localStorage.getItem(`${storagePrefix}authData`)
+    ? JSON.parse(localStorage.getItem(`${storagePrefix}authData`))
     : null,
   setAuthData: (authData) => {
-    localStorage.setItem("authData", JSON.stringify(authData));
+    localStorage.setItem(`${storagePrefix}authData`, JSON.stringify(authData));
     set({ authData });
   },
   clearAuthData: () => {
-    localStorage.removeItem("authData");
+    localStorage.removeItem(`${storagePrefix}authData`);
     set({ authData: null });
   },
 }));
