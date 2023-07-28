@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 const ProtectedRoute = () => {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const checkUserToken = () => {
-    const userToken = localStorage.getItem("authData");
-    if (!userToken || userToken === "undefined") {
-      setIsLoggedIn(false);
-      return navigate("/");
-    }
-    setIsLoggedIn(true);
-  };
-  useEffect(() => {
-    checkUserToken();
-  }, [isLoggedIn]);
-  return (
+  const userToken = localStorage.getItem("authData");
+
+  return !userToken || userToken === "undefined" || userToken === null ? (
+    <Navigate to="/" />
+  ) : (
     <React.Fragment>
       <Header />
       <Outlet />
