@@ -1,12 +1,13 @@
 import { FaCog, FaFileAlt, FaPlay, FaUser } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import { useStore } from "../../hooks/useStore";
 import Dropdown from "react-dropdown";
 import "./Header.scss";
 
 const Header = () => {
-  const { authData, setAuthData } = useStore();
+  const { authData, setAuthData, clearAuthData } = useStore();
+  const navigate = useNavigate();
   return (
     <header>
       <nav>
@@ -50,9 +51,8 @@ const Header = () => {
                   switch (e.value) {
                     case "1":
                       googleLogout();
-                      window.localStorage.removeItem("authData");
-                      setAuthData(null);
-                      window.location.reload();
+                      clearAuthData();
+                      navigate("/");
                       break;
                     case "2":
                       window.location.href = "/settings";

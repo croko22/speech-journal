@@ -1,4 +1,5 @@
 import { create } from "zustand";
+const storagePrefix = "speech_journal_";
 
 export const useStore = create((set) => ({
   authData: localStorage.getItem("authData")
@@ -7,5 +8,9 @@ export const useStore = create((set) => ({
   setAuthData: (authData) => {
     localStorage.setItem("authData", JSON.stringify(authData));
     set({ authData });
+  },
+  clearAuthData: () => {
+    localStorage.removeItem("authData");
+    set({ authData: null });
   },
 }));
