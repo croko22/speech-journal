@@ -2,15 +2,15 @@ import { FaPlay, FaAngleUp, FaAngleDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { axios } from "../../hooks/axios";
+import { useStore } from "../../hooks/useStore";
 import Dropdown from "react-dropdown";
 
 function useSessions() {
+  const authData = useStore((state) => state.authData);
   return useQuery({
     queryKey: ["sessions"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `/journal-sessions/${JSON.parse(localStorage.getItem("authData"))._id}`
-      );
+      const { data } = await axios.get(`/journal-sessions/${authData._id}`);
       return data;
     },
   });

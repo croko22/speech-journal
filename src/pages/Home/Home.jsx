@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { axios } from "../../hooks/axios";
+import { useStore } from "../../hooks/useStore";
 import "./Home.scss";
 import StartSession from "../../components/StartSession/StartSession";
 
 function Home() {
   const [savedLogs, setSavedLogs] = useState([]);
+  const authData = useStore((state) => state.authData);
 
   //* Fetch logs from DB
   useEffect(() => {
     const fetchLogs = async () => {
-      const res = await axios.get(
-        `/journal-entries/${JSON.parse(localStorage.getItem("authData"))._id}`
-      );
+      const res = await axios.get(`/journal-entries/${authData._id}`);
       setSavedLogs(res.data);
     };
     fetchLogs();

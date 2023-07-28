@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useStore } from "../../hooks/useStore";
 import { axios } from "../../hooks/axios";
 import RecordNote from "../../components/RecordNote/RecordNote";
 import "./InSession.scss";
@@ -12,6 +13,7 @@ const getSessionById = async (id) => {
 
 const InSession = () => {
   const navigate = useNavigate();
+  const authData = useStore((state) => state.authData);
   //? Get stored sessions
   const [storedSessions, setStoredSessions] = useState([]);
   const [index, setIndex] = useState(1);
@@ -49,7 +51,7 @@ const InSession = () => {
   const saveNote = async () => {
     await axios.post(`/journal-entries`, {
       qas: allNotes,
-      user: JSON.parse(localStorage.getItem("authData"))._id,
+      user: authData._id,
     });
   };
 

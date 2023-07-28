@@ -6,7 +6,7 @@ import Dropdown from "react-dropdown";
 import "./Header.scss";
 
 const Header = () => {
-  const { authData, setAuthData, clearAuthData } = useStore();
+  const { authData, clearAuthData } = useStore();
   const navigate = useNavigate();
   return (
     <header>

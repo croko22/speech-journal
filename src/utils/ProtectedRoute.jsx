@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useStore } from "../hooks/useStore";
 import Header from "../components/Header/Header";
 const ProtectedRoute = () => {
-  const userToken = localStorage.getItem("authData");
-
-  return !userToken || userToken === "undefined" || userToken === null ? (
+  //TODO: Replace this with a useAuth hook
+  const authData = useStore((state) => state.authData);
+  return !authData || authData === "undefined" || authData === null ? (
     <Navigate to="/" />
   ) : (
     <React.Fragment>
