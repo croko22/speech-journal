@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../hooks/useStore";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./Landing.scss";
 
@@ -14,8 +15,9 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      {/* //TODO: Add a header*/}
+      {/* //TODO: Customize the landing header*/}
       {/* <a href="#pricing">Pricing</a> */}
+      <Header />
 
       <section className="hero">
         <div className="container">
