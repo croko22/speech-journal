@@ -1,12 +1,12 @@
 import { FaCog, FaFileAlt, FaPlay, FaUser } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import { useStore } from "../../hooks/useStore";
+import storage from "../../hooks/storage";
 import Dropdown from "react-dropdown";
 import "./Header.scss";
 
 const Header = () => {
-  const { authData, clearAuthData } = useStore();
+  const authData = storage.getToken();
   const navigate = useNavigate();
   return (
     <header>
@@ -51,7 +51,7 @@ const Header = () => {
                   switch (e.value) {
                     case "1":
                       googleLogout();
-                      clearAuthData();
+                      storage.removeToken();
                       navigate("/");
                       break;
                     case "2":

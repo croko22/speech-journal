@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { FaCheck, FaTimes, FaSkull } from "react-icons/fa";
-import { useStore } from "../../hooks/useStore";
 import { axios } from "../../hooks/axios";
+import storage from "../../hooks/storage";
 import "./UserSettings.scss";
 
 const UserSettings = () => {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const [authData, clearAuthData] = useStore((state) => [
-    state.authData,
-    state.clearAuthData,
-  ]);
   const user = authData;
+
+  //TODO: Add fetch to get user data and patch to update user data
 
   const handleDeleteClick = () => {
     setShowDeleteButton(false);
-    axios.delete(`/users/${authData._id}`);
-    clearAuthData();
+    axios.delete(`/users`);
+    storage.removeToken();
     window.location.reload();
   };
 
