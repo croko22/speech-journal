@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "../../hooks/useStore";
+import storage from "../../hooks/storage";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "./Landing.scss";
 
 const Landing = () => {
-  const authData = useStore((state) => state.authData);
+  const authData = storage.getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const Landing = () => {
   return (
     <div className="landing-page">
       {/* //TODO: Customize the landing header*/}
-      {/* <a href="#pricing">Pricing</a> */}
       <Header />
 
       <section className="hero">

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaTrashAlt, FaRegEdit, FaTimes, FaRegSave } from "react-icons/fa";
 import { axios } from "../../hooks/axios";
-import { useStore } from "../../hooks/useStore";
 import "./SessionCard.scss";
 
 const SessionCard = ({
@@ -19,12 +18,10 @@ const SessionCard = ({
 }) => {
   const queryClient = useQueryClient();
   const [sessionName, setSessionName] = useState(session.name);
-  const authData = useStore((state) => state.authData);
 
   const createSessionMutation = useMutation({
     mutationFn: async () => {
       await axios.post(`/journal-sessions`, {
-        user: authData._id,
         name: sessionName,
         questions: [],
       });

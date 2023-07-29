@@ -1,9 +1,7 @@
-import { useStore } from "../../hooks/useStore";
 import { axios } from "../../hooks/axios";
+import storage from "../../hooks/storage";
 
 const Login = ({ email, setEmail, password, setPassword }) => {
-  const setAuthData = useStore((state) => state.setAuthData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -12,9 +10,9 @@ const Login = ({ email, setEmail, password, setPassword }) => {
         password,
       });
 
-      if (res.status === 201) setAuthData(res.data.user);
+      if (res.status === 201) storage.setToken(res.data);
       else console.log("Login failed");
-      console.log(res.data);
+      //console.log(res.data);
     } catch (error) {
       console.log(error);
     }

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useStore } from "../../hooks/useStore";
+import { useNavigate } from "react-router-dom";
 import { axios } from "../../hooks/axios";
 
 const Register = ({ email, setEmail, password, setPassword }) => {
   const [username, setUsername] = useState("");
-  const setAuthData = useStore((state) => state.setAuthData);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const Register = ({ email, setEmail, password, setPassword }) => {
         password,
       });
       if (response.status === 201) {
-        setAuthData(response.data);
+        navigate("/login");
       } else console.log("Register failed");
     } catch (error) {
       console.log(error);

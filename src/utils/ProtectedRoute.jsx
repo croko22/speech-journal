@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { useStore } from "../hooks/useStore";
+import storage from "../hooks/storage";
 import Header from "../components/Header/Header";
 const ProtectedRoute = () => {
   //TODO: Replace this with a useAuth hook
-  const authData = useStore((state) => state.authData);
+  const authData = storage.getToken();
   return !authData || authData === "undefined" || authData === null ? (
     <Navigate to="/" />
   ) : (

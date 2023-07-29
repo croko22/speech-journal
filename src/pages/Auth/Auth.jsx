@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStore } from "../../hooks/useStore";
 import { GoogleLogin } from "@react-oauth/google";
 import { axios } from "../../hooks/axios";
+import storage from "../../hooks/storage";
 import Login from "../../components/Auth/Login";
 import Register from "../../components/Auth/Register";
 import "./Auth.scss";
@@ -11,8 +11,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authMode, setAuthMode] = useState("login"); // ["login", "register"]
-  const setAuthData = useStore((state) => state.setAuthData);
-  const authData = useStore((state) => state.authData);
+  const authData = storage.getToken();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,12 +67,13 @@ const Auth = () => {
                 </p>
               )}
               <p>or</p>
+              {/* TODO: Acoplar gAuth */}
               <GoogleLogin
                 onSuccess={async (credentialResponse) => {
                   const response = await axios.post(`/auth/google`, {
                     token: credentialResponse.credential,
                   });
-                  setAuthData(response.data);
+                  storage.setToken(response.data);
                 }}
                 onError={() => {
                   console.log("Login Failed");
