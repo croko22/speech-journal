@@ -24,7 +24,6 @@ const SessionCard = ({
   const createSessionMutation = useMutation({
     mutationFn: async () => {
       await axios.post(`/journal-sessions`, {
-        user: authData._id,
         name: sessionName,
         questions: [],
       });

@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useStore } from "../../hooks/useStore";
 import { axios } from "../../hooks/axios";
 import "./SavedLogs.scss";
 
 const SavedLogs = () => {
   const queryClient = useQueryClient();
-  const authData = useStore((state) => state.authData);
   const [savedLogs, setSavedLogs] = useState([]);
 
   //* Fetch logs from DB
   useEffect(() => {
     const fetchLogs = async () => {
-      const res = await axios.get(`/journal-entries/${authData._id}`);
+      const res = await axios.get(`/journal-entries`);
       setSavedLogs(res.data);
     };
     fetchLogs();

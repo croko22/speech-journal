@@ -12,9 +12,9 @@ const Login = ({ email, setEmail, password, setPassword }) => {
         password,
       });
 
-      if (res.status === 201) setAuthData(res.data.user);
+      if (res.status === 201) setAuthData(res.data);
       else console.log("Login failed");
-      console.log(res.data);
+      //console.log(res.data);
     } catch (error) {
       console.log(error);
     }
