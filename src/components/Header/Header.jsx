@@ -51,7 +51,7 @@ const Header = () => {
                   switch (e.value) {
                     case "1":
                       googleLogout();
-                      storage.removeToken();
+                      storage.clearToken();
                       navigate("/");
                       break;
                     case "2":
