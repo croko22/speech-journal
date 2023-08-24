@@ -1,7 +1,10 @@
 import { axios } from "../../hooks/axios";
+import { useNavigate } from "react-router-dom";
 import storage from "../../hooks/storage";
 
 const Login = ({ email, setEmail, password, setPassword }) => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -10,8 +13,10 @@ const Login = ({ email, setEmail, password, setPassword }) => {
         password,
       });
 
-      if (res.status === 201) storage.setToken(res.data);
-      else console.log("Login failed");
+      if (res.status === 201) {
+        storage.setToken(res.data);
+        navigate("/home");
+      } else console.log("Login failed");
       //console.log(res.data);
     } catch (error) {
       console.log(error);
