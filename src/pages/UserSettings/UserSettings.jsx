@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCheck, FaTimes, FaSkull } from "react-icons/fa";
 import { axios } from "../../hooks/axios";
 import storage from "../../hooks/storage";
@@ -6,9 +6,16 @@ import "./UserSettings.scss";
 
 const UserSettings = () => {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const user = authData;
+  const [user, setUser] = useState({});
 
   //TODO: Add fetch to get user data and patch to update user data
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/users/me`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, []);
 
   const handleDeleteClick = () => {
     setShowDeleteButton(false);
