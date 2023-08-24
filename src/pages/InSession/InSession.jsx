@@ -17,33 +17,31 @@ const InSession = () => {
   const [index, setIndex] = useState(1);
   const [currentQuestion, setCurrentQuestion] = useState({});
   //* Note
-  const [note, setNote] = useState({
-    question: currentQuestion?.question || "",
-    answer: "",
-  });
+  const [note, setNote] = useState({});
   const [allNotes, setAllNotes] = useState([]);
+  //? Question phases (Think, answer, next)
+  const quesTionPhases = ["think", "answer", "next", "end"];
+  const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
+  //? Timer
+  const [counter, setCounter] = useState(null);
+  //? Handle speech input
+  const [isListening, setIsListening] = useState(false);
+
   //* Query session id
   const { sessionId } = useParams();
-  const { status } = useQuery({
+  const { status, isLoading } = useQuery({
     queryKey: ["session", sessionId],
     queryFn: () => getSessionById(sessionId),
     onSuccess: (data) => {
       setCurrentQuestion(data?.questions[0]);
       setStoredSessions(data?.questions || []);
+      setCounter(data?.questions[0]?.timeToThink);
       setNote({
         question: data?.questions[0]?.question,
         answer: "",
       });
     },
   });
-
-  //? Question phases (Think, answer, next)
-  const quesTionPhases = ["think", "answer", "next", "end"];
-  const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
-  //? Timer
-  const [counter, setCounter] = useState(currentQuestion?.timeToThink || 15);
-  //? Handle speech input
-  const [isListening, setIsListening] = useState(false);
 
   //? Send to backend
   const saveNote = async () => {
@@ -93,6 +91,8 @@ const InSession = () => {
       }
     }
   }, [counter]);
+
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div className="session">
