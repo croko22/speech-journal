@@ -32,7 +32,7 @@ const SavedLogs = () => {
     <div className="logs-containter">
       <h1>Saved logs</h1>
       <ul className="logs-grid">
-        {savedLogs.map((log, index) => (
+        {savedLogs?.map((log, index) => (
           <li className="log-card" key={index}>
             <p className="log-card__date">
               <small>{log.dateAdded?.slice(0, 10)}</small>{" "}
