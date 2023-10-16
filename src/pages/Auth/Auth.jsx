@@ -67,8 +67,12 @@ const Auth = () => {
                 </p>
               )}
               <p>or</p>
-              {/* TODO: Acoplar gAuth */}
-              <GoogleLogin
+              {/* 
+              //TODO: Acoplar gAuth 
+              //TODO: Arreglar el backend pa que reciba un token de google y lo valide
+              */}
+
+              {/* <GoogleLogin
                 onSuccess={async (credentialResponse) => {
                   const response = await axios.post(`/auth/google`, {
                     token: credentialResponse.credential,
@@ -78,7 +82,7 @@ const Auth = () => {
                 onError={() => {
                   console.log("Login Failed");
                 }}
-              />
+              /> */}
             </div>
           </div>
         </div>

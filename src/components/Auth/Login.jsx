@@ -16,8 +16,7 @@ const Login = ({ email, setEmail, password, setPassword }) => {
       if (res.status === 201) {
         storage.setToken(res.data);
         navigate("/home");
-      } else console.log("Login failed");
-      //console.log(res.data);
+      }
     } catch (error) {
       console.log(error);
     }
