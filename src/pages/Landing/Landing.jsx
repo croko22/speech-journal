@@ -15,21 +15,20 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      {/* //TODO: Customize the landing header*/}
       <Header />
-
       <section className="hero">
-        <div className="container">
-          <h1 className="title">Speech Journal 🎤</h1>
+        <div>
+          <h1 className="title">Journaling by VOICE 🎤</h1>
           <p className="subtitle">
             Effortless journaling with the power of your voice
           </p>
-          <div className="cta">
-            <a className="btn" href="/auth">
-              Get Started
-            </a>
-            <button className="btn btn-secondary">Learn More</button>
-          </div>
+          <a className="btn" href="/auth">
+            Get Started
+          </a>
+          {/* <button className="btn btn-secondary">Learn More</button> */}
+        </div>
+        <div className="mock-container">
+          <img src="/mock_desktop.png" alt="Hero" className="" />
         </div>
       </section>
 
