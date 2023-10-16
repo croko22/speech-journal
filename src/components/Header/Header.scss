@@ -80,8 +80,9 @@ header {
     .dropdown-menu {
       position: absolute;
       background-color: #eee;
-      width: 100%;
       padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
 
       div {
         &:hover {
@@ -92,11 +93,8 @@ header {
     }
 
     .dropdown-placeholder {
-      padding: 5px 10px;
-
-      &:hover {
-        cursor: pointer;
-        color: #aaa;
+      @media screen and (max-width: 767px) {
+        display: none;
       }
     }
   }

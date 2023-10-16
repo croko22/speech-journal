@@ -44,18 +44,18 @@ const Header = () => {
               <FaUser className="icon" />
               <Dropdown
                 options={[
-                  { value: "1", label: "Logout" },
-                  { value: "2", label: "Settings" },
+                  { value: "1", label: "Settings" },
+                  { value: "2", label: "Logout" },
                 ]}
                 onChange={(e) => {
                   switch (e.value) {
                     case "1":
+                      window.location.href = "/settings";
+                      break;
+                    case "2":
                       googleLogout();
                       storage.clearToken();
                       navigate("/");
-                      break;
-                    case "2":
-                      window.location.href = "/settings";
                       break;
                     default:
                       break;
