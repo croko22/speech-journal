@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { axios } from "../../hooks/axios";
 import RecordNote from "../../components/RecordNote/RecordNote";
+import { getSessionById, saveNote } from "../../lib/api";
 import "./InSession.scss";
-
-const getSessionById = async (id) => {
-  const { data } = await axios.get(`/journal-sessions/session/${id}`);
-  return data;
-};
 
 const InSession = () => {
   const navigate = useNavigate();
@@ -23,7 +18,7 @@ const InSession = () => {
   const quesTionPhases = ["think", "answer", "next", "end"];
   const [questionsPhase, setQuestionsPhase] = useState(quesTionPhases[0]);
   //? Timer
-  const [counter, setCounter] = useState(null);
+  const [counter, setCounter] = useState(15);
   //? Handle speech input
   const [isListening, setIsListening] = useState(false);
 
@@ -42,13 +37,6 @@ const InSession = () => {
       });
     },
   });
-
-  //? Send to backend
-  const saveNote = async () => {
-    await axios.post(`/journal-entries`, {
-      qas: allNotes,
-    });
-  };
 
   //? Timer
   useEffect(() => {
@@ -82,7 +70,7 @@ const InSession = () => {
             break;
           case "end":
             setAllNotes([...allNotes, note]);
-            saveNote();
+            saveNote(allNotes);
             navigate("/saved-logs");
             break;
           default:
@@ -101,19 +89,16 @@ const InSession = () => {
       </h1>
       <p className="session__timer">{counter}</p>
       <div className="session__question">
-        {
+        {questionsPhase !== "next" && questionsPhase !== "end" && (
           <h1 className="session__question__title">
-            {questionsPhase !== "next" &&
-              questionsPhase !== "end" &&
-              currentQuestion?.question}
+            {currentQuestion?.question}
           </h1>
-        }
+        )}
         <p className="session__question__phase">
-          {questionsPhase === "think"
-            ? "Think and reflect for some time..."
-            : questionsPhase === "next"
-            ? "New question incoming"
-            : "I'm all ears... 👂👂👂"}
+          {questionsPhase === "think" && "Think and reflect for some time..."}
+          {questionsPhase === "next" && "New question incoming"}
+          {questionsPhase === "answer" && "I'm all ears... 👂👂👂"}
+          {questionsPhase === "end" && "Session ended"}
         </p>
       </div>
       <RecordNote

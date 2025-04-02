@@ -1,8 +1,11 @@
 import { axios } from "../../hooks/axios";
 import { useNavigate } from "react-router-dom";
 import storage from "../../hooks/storage";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Login = ({ email, setEmail, password, setPassword }) => {
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -15,10 +18,11 @@ const Login = ({ email, setEmail, password, setPassword }) => {
 
       if (res.status === 201) {
         storage.setToken(res.data);
+        toast.success("Login successful");
         navigate("/home");
       }
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -54,6 +58,11 @@ const Login = ({ email, setEmail, password, setPassword }) => {
           Speech journal
         </p>
       </div>
+
+      <div className="login-form-4">
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </div>
+
       <div className="login-form-submit-btn">
         <button>Sign in</button>
       </div>

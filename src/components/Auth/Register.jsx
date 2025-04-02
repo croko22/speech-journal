@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axios } from "../../hooks/axios";
+import { toast } from "sonner";
 
 const Register = ({ email, setEmail, password, setPassword }) => {
   const [username, setUsername] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,9 +18,10 @@ const Register = ({ email, setEmail, password, setPassword }) => {
       });
       if (response.status === 201) {
         navigate("/login");
+        toast.success("Registration successful");
       } else console.log("Register failed");
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -60,12 +63,15 @@ const Register = ({ email, setEmail, password, setPassword }) => {
       </div>
 
       <div className="login-form-4">
-        <input type="checkbox" id="input-checkbox" />
+        <input type="checkbox" id="input-checkbox" required />
         <p>
           By creating an account, you agree to the{" "}
           <a href="#">Terms & Conditions.</a>
         </p>
       </div>
+
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <div className="login-form-submit-btn">
         <button>Create an Account</button>
       </div>

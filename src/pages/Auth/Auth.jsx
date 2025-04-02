@@ -10,7 +10,7 @@ import "./Auth.scss";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [authMode, setAuthMode] = useState("login"); // ["login", "register"]
+  const [authMode, setAuthMode] = useState("login");
   const authData = storage.getToken();
   const navigate = useNavigate();
 
@@ -56,23 +56,26 @@ const Auth = () => {
               {authMode === "login" ? (
                 <p>
                   Don't have an account?{" "}
-                  <button onClick={() => setAuthMode("register")}>
+                  <button
+                    className="auth-toggle"
+                    onClick={() => setAuthMode("register")}
+                  >
                     Register
                   </button>
                 </p>
               ) : (
                 <p>
                   Already have an account?{" "}
-                  <button onClick={() => setAuthMode("login")}>Login</button>
+                  <button
+                    className="auth-toggle"
+                    onClick={() => setAuthMode("login")}
+                  >
+                    Login
+                  </button>
                 </p>
               )}
-              <p>or</p>
-              {/* 
-              //TODO: Acoplar gAuth 
-              //TODO: Arreglar el backend pa que reciba un token de google y lo valide
-              */}
-
-              {/* <GoogleLogin
+              {/* <p>or</p>
+              <GoogleLogin
                 onSuccess={async (credentialResponse) => {
                   const response = await axios.post(`/auth/google`, {
                     token: credentialResponse.credential,
